@@ -30,22 +30,26 @@
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="105dp"
-        android:layout_height="56dp"
+        android:layout_width="136dp"
+        android:layout_height="48dp"
         android:autoSizeMaxTextSize="35sp"
+        android:background="?attr/colorAccent"
         android:text="Present"
+        android:textColor="@color/cardview_light_background"
         tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="31dp"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="437dp" />
 
     <Button
         android:id="@+id/button8"
-        android:layout_width="122dp"
-        android:layout_height="55dp"
+        android:layout_width="138dp"
+        android:layout_height="48dp"
+        android:background="?attr/colorAccent"
         android:text="Absent"
-        tools:layout_editor_absoluteX="215dp"
-        tools:layout_editor_absoluteY="437dp"
-        tools:ignore="HardcodedText,MissingConstraints" />
+        android:textColor="@color/cardview_light_background"
+        tools:ignore="HardcodedText,MissingConstraints"
+        tools:layout_editor_absoluteX="206dp"
+        tools:layout_editor_absoluteY="437dp" />
 
     <TextView
         android:id="@+id/textView3"
