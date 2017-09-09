@@ -30,19 +30,20 @@
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="105dp"
+        android:layout_height="56dp"
+        android:autoSizeMaxTextSize="35sp"
         android:text="Present"
         tools:ignore="HardcodedText,MissingConstraints"
-        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteX="31dp"
         tools:layout_editor_absoluteY="437dp" />
 
     <Button
         android:id="@+id/button8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="122dp"
+        android:layout_height="55dp"
         android:text="Absent"
-        tools:layout_editor_absoluteX="232dp"
+        tools:layout_editor_absoluteX="215dp"
         tools:layout_editor_absoluteY="437dp"
         tools:ignore="HardcodedText,MissingConstraints" />
 
