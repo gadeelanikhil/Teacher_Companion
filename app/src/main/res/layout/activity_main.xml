@@ -35,6 +35,7 @@
         android:layout_marginStart="8dp"
         app:cardCornerRadius="9dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         tools:ignore="MissingConstraints"
@@ -43,44 +44,47 @@
         tools:layout_constraintRight_creator="1">
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="115dp"
-            android:layout_height="120dp"
-            android:layout_marginTop="18dp" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="118dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="110dp"
-            android:layout_marginTop="18dp" />
-
-        <Button
             android:id="@+id/button3"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="223dp"
-            android:layout_marginTop="18dp" />
+            android:layout_width="61dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="38dp" />
 
         <Button
             android:id="@+id/button4"
-            android:layout_width="115dp"
-            android:layout_height="120dp"
+            android:layout_width="61dp"
+            android:layout_height="55dp"
             android:layout_marginBottom="25dp"
-            android:layout_marginTop="140dp" />
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="155dp" />
 
         <Button
             android:id="@+id/button5"
-            android:layout_width="118dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="110dp"
-            android:layout_marginTop="140dp" />
+            android:layout_width="61dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="135dp"
+            android:layout_marginTop="155dp" />
 
         <Button
             android:id="@+id/button6"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_marginStart="223dp"
-            android:layout_marginTop="140dp" />
+            android:layout_width="61dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="155dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="61dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/stats_line_chart" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="61dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="135dp"
+            android:layout_marginTop="38dp" />
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

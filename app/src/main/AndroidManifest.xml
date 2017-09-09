@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".addclass" />
-        <activity android:name=".TakeAttendence"></activity>
+        <activity android:name=".TakeAttendence" />
+        <activity android:name=".rateus"></activity>
     </application>
 
 </manifest>
