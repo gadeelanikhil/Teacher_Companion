@@ -1,3 +1,5 @@
+
+
 package teratroopers.teachercompanion;
 
 import android.app.ProgressDialog;
@@ -14,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.DataOutputStream;
@@ -25,11 +28,11 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Attendance extends AppCompatActivity {
+public class TakeAttendence extends AppCompatActivity {
 
     mydbhelper mydb;
     int sroll,eroll;
-    Button disbutton;
+    TextView disbutton;
     Button presbutton;
     Button absbutton;
     int total;
@@ -42,7 +45,7 @@ public class Attendance extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.TakeAttendance);
+        setContentView(R.layout.activity_take_attendence);
         context=this;
         mydb =new mydbhelper(this);
         Bundle b = getIntent().getExtras();
@@ -57,7 +60,7 @@ public class Attendance extends AppCompatActivity {
 
     public void getValues(String name) {
 
-        disbutton = (Button) findViewById(R.id.rolldisplay);
+        disbutton = (TextView) findViewById(R.id.textView2);
         Cursor res = mydb.getcname(name);
         res.moveToNext();
         sroll = Integer.parseInt(res.getString(0));
@@ -69,8 +72,6 @@ public class Attendance extends AppCompatActivity {
     }
     public void display(){
         String number=Integer.toString(droll);
-        disbutton.setBackgroundColor(Color.BLUE);
-        disbutton.setClickable(false);
         disbutton.setText(number);
     }
 
@@ -135,7 +136,7 @@ public class Attendance extends AppCompatActivity {
     }
 
     public void buttonclickfordisplayingvalues(){
-        Button butt = (Button)findViewById(R.id.arse);
+        Button butt = (Button)findViewById(R.id.floatingActionButton2);
         butt.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

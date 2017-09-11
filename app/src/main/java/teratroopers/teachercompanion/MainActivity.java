@@ -10,7 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private  Button button_more;
-     private  Button button_list;
+    private  Button button_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
