@@ -16,9 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".addclass" />
-        <activity android:name=".TakeAttendence" />
-        <activity android:name=".rateus"></activity>
+        <activity android:name=".addclass">
+            <intent-filter>
+                <action android:name="teratroopers.teachercompanion.addclass" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".TakeAttendence">
+            <intent-filter>
+                <action android:name="teratroopers.teachercompanion.TakeAttendence" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
