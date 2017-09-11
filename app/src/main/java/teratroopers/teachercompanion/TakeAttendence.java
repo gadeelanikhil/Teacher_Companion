@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -75,7 +76,7 @@ public class TakeAttendence extends AppCompatActivity {
         disbutton.setText(number);
     }
 
-    //TODO store values in database and provide back button on snackbar (partially complete)
+    //TODO store values in database and provide back button on snackbar (partially complete)//
     public void presentButton(){
         total=(eroll-sroll)+1;
         presbutton=(Button)findViewById(R.id.present);
@@ -136,7 +137,7 @@ public class TakeAttendence extends AppCompatActivity {
     }
 
     public void buttonclickfordisplayingvalues(){
-        Button butt = (Button)findViewById(R.id.floatingActionButton2);
+        FloatingActionButton  butt = (FloatingActionButton) findViewById(R.id.floatingActionButton2);
         butt.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -148,7 +149,7 @@ public class TakeAttendence extends AppCompatActivity {
                         while (res.moveToNext()) {
 
                             buffer.append(res.getString(0)+"=");
-                            buffer.append(res.getString(1) + "\n");
+                            buffer.append(res.getString(1)+ "\n");
                             //buffer.append("Ending Roll :" + res.getString(2) + "\n");
                         }
                         showmessage("Data", buffer.toString());
