@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="Back Up & Restore"
+            android:text="Back Up and Restore"
             android:textColor="@android:color/background_dark"
             android:textSize="18sp" />
 
@@ -111,7 +111,6 @@
         android:id="@+id/toolbar4"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-2dp"
         android:background="?attr/colorAccent"
         android:elevation="8dp"
         android:minHeight="?attr/actionBarSize"
@@ -120,5 +119,5 @@
         app:title="Settings"
         app:titleMarginStart="40dp"
         app:titleTextColor="@color/cardview_light_background"
-        tools:layout_editor_absoluteX="-11dp" />
+        tools:layout_editor_absoluteX="-8dp" />
 </android.support.constraint.ConstraintLayout>

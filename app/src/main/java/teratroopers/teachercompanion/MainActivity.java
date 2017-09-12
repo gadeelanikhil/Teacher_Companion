@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
         public void OnClickListListener(){
-            Button button_list = (Button)findViewById(R.id.button2);
+            Button button_list = (Button)findViewById(R.id.button3);
             button_list.setOnClickListener(new View.OnClickListener()
             {
                 @Override
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     public  void OnClickButtonListener()
     {
-        Button button_addclass = (Button) findViewById(R.id.button);
+        Button button_addclass = (Button) findViewById(R.id.button4);
         button_addclass.setOnClickListener(new View.OnClickListener()
         {
             @Override
