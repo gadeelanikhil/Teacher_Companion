@@ -11,7 +11,8 @@
         android:layout_height="50dp"
         android:elevation="9dp"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="119dp">
+        tools:layout_editor_absoluteY="119dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textView9"
@@ -119,5 +120,6 @@
         app:title="Settings"
         app:titleMarginStart="40dp"
         app:titleTextColor="@color/cardview_light_background"
-        tools:layout_editor_absoluteX="-8dp" />
+        tools:layout_editor_absoluteX="-2dp"
+        tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>
