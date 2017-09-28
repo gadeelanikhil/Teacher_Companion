@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     private  Button button_more;
     private  Button button_list;
+    private  Button button_setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         OnClickButtonListener();
         OnClickListListener();
+        OnClicSettingListener();
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 
     }
@@ -47,5 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void OnClicSettingListener(){
+        Button button_setting = (Button)findViewById(R.id.button6);
+        button_setting.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                Intent intent_list = new Intent("teratroopers.teachercompanion.rateus");
+                startActivity(intent_list);
+            }
+        });
+
     }
 }

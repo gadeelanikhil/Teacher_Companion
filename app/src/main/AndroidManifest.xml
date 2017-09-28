@@ -28,6 +28,12 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+        <activity android:name=".rateus">
+            <intent-filter>
+                <action android:name="teratroopers.teachercompanion.rateus" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
