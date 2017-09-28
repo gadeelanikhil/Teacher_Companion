@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void OnClicSettingListener(){
-        Button button_setting = (Button)findViewById(R.id.button6);
+        Button button_setting = (Button)findViewById(R.id.button5);
         button_setting.setOnClickListener(new View.OnClickListener()
         {
             @Override
