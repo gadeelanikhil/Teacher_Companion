@@ -30,8 +30,6 @@ public class addclass extends AppCompatActivity {
         viw=(Button)findViewById(R.id.button6);
         fab=(FloatingActionButton)findViewById(R.id.floatingActionButton);
         confirmfab();
-        viewall();
-        //backbtn();
 
     }
     public void confirmfab()
@@ -90,48 +88,5 @@ public class addclass extends AppCompatActivity {
                 }
         );
     }
-    public void viewall(){
 
-        viw.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Cursor res = mydb.getalldata();
-                        if (res.getCount() == 0) {
-                            //show message
-                            showmessage("Error", "Nothing found");
-                            return;
-                        }
-                        StringBuffer buffer = new StringBuffer();
-                        while (res.moveToNext()) {
-                            buffer.append("ClassName :" + res.getString(0) + "\n");
-                            buffer.append("Starting Roll :" + res.getString(1) + "\n");
-                            buffer.append("Ending Roll :" + res.getString(2) + "\n");
-
-                        }
-                        //show all data
-                        showmessage("Data", buffer.toString());
-                    }
-                }
-        );
-    }
-    public void showmessage(String title,String Message) {
-        AlertDialog.Builder builder = new  AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(Message);
-        builder.show();
-
-    }
-
-   /* public void backbtn(){
-        btn.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        finish();
-                    }
-                }
-        );
-    }*/
 }

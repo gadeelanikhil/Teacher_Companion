@@ -12,9 +12,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
 
-    private  Button button_more;
-    private  Button button_list;
-    private  Button button_setting;
+    Button btnaddclass,btnclasslist,btnregister,btnstatistics,btnsettings,btnmore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,48 +21,41 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        OnClickButtonListener();
-        OnClickListListener();
-        OnClicSettingListener();
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 
+        btnaddclass=(Button)findViewById(R.id.addclass);
+        btnregister=(Button)findViewById(R.id.register);
+        btnclasslist=(Button)findViewById(R.id.classlist);
+        btnstatistics=(Button)findViewById(R.id.statistics);
+        btnsettings=(Button)findViewById(R.id.settings);
+        btnmore=(Button)findViewById(R.id.more);
+        activityListener();
     }
-        public void OnClickListListener(){
-            Button button_list = (Button)findViewById(R.id.button3);
-            button_list.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View view) {
-                    Intent intent_list = new Intent("teratroopers.teachercompanion.TakeAttendence");
-                    startActivity(intent_list);
+    public void activityListener(){
+        btnaddclass.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent addclassAct=new Intent("teratroopers.teachercompanion.addclass");
+                        startActivity(addclassAct);
+                    }
                 }
-            });
-
-        }
-
-    public  void OnClickButtonListener()
-    {
-        Button button_addclass = (Button) findViewById(R.id.button4);
-        button_addclass.setOnClickListener(new View.OnClickListener()
-        {
+        );
+        btnclasslist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_addclass = new Intent("teratroopers.teachercompanion.addclass");
-                startActivity(intent_addclass);
-
+                Intent classListAct=new Intent("teratroopers.teachercompanion.ClassList");
+                startActivity(classListAct);
             }
         });
-    }
-    public void OnClicSettingListener(){
-        Button button_setting = (Button)findViewById(R.id.button5);
-        button_setting.setOnClickListener(new View.OnClickListener()
-        {
+        btnsettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_list = new Intent("teratroopers.teachercompanion.rateus");
-                startActivity(intent_list);
+                Intent settingsAct=new Intent("teratroopers.teachercompanion.settings");
+                startActivity(settingsAct);
             }
         });
 
     }
+
+
 }

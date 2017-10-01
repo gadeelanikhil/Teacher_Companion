@@ -7,31 +7,42 @@
         android:icon="@mipmap/ic_launcher"
         android:label="Teacher Companion"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/tc_theme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".addclass">
             <intent-filter>
                 <action android:name="teratroopers.teachercompanion.addclass" />
-                <category android:name="android.intent.category.DEFAULT"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".TakeAttendence">
             <intent-filter>
                 <action android:name="teratroopers.teachercompanion.TakeAttendence" />
-                <category android:name="android.intent.category.DEFAULT"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".rateus">
+        <activity android:name=".settings">
             <intent-filter>
-                <action android:name="teratroopers.teachercompanion.rateus" />
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="teratroopers.teachercompanion.settings" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ClassList">
+            <intent-filter>
+                <action android:name="teratroopers.teachercompanion.ClassList" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
     </application>

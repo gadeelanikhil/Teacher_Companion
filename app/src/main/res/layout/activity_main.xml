@@ -84,12 +84,12 @@
             android:layout_marginTop="160dp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/addclass"
             android:layout_width="53dp"
             android:layout_height="47dp"
             android:layout_marginStart="25dp"
             android:layout_marginTop="38dp"
-            android:background="@drawable/stats_line_chart" />
+            android:background="@drawable/addclass" />
 
         <Button
             android:id="@+id/button2"
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:layout_marginTop="100dp"
-            android:text="Statistics"
+            android:text="addclass"
             android:textSize="14sp"
             tools:ignore="HardcodedText" />
 
