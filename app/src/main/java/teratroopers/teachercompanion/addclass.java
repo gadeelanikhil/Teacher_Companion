@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +32,13 @@ public class addclass extends AppCompatActivity {
         a3 = (EditText) findViewById(R.id.editText3);
         viw=(Button)findViewById(R.id.button6);
         fab=(FloatingActionButton)findViewById(R.id.floatingActionButton);
+        animateImg();
         confirmfab();
 
+    }
+    public void animateImg(){
+        ImageView addclassimg=(ImageView)findViewById(R.id.addimg);
+        addclassimg.animate().rotation(360).setDuration(900);
     }
     public void confirmfab()
     {

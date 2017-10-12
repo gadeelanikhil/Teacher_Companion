@@ -46,7 +46,7 @@
         tools:layout_constraintTop_creator="1" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/addimg"
         android:layout_width="89dp"
         android:layout_height="79dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -128,7 +128,12 @@
         app:layout_constraintLeft_toRightOf="@+id/toolbar3"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintBottom_toTopOf="@+id/cardView5"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/addimg"
         app:layout_constraintVertical_bias="0.333" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </android.support.constraint.ConstraintLayout>
