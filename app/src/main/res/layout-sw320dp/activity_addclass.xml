@@ -47,8 +47,8 @@
 
     <ImageView
         android:id="@+id/addimg"
-        android:layout_width="89dp"
-        android:layout_height="79dp"
+        android:layout_width="77dp"
+        android:layout_height="68dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -91,7 +91,7 @@
             android:id="@+id/editText6"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="110dp"
             android:backgroundTint="@color/colorAccent"
             android:ems="10"
@@ -133,7 +133,17 @@
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="32dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="0dp"
+        android:background="@android:drawable/ic_menu_sort_by_size"
+        android:elevation="3dp"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar3"
+        app:layout_constraintHorizontal_bias="0.877"
+        app:layout_constraintLeft_toRightOf="@+id/toolbar3"
+        app:layout_constraintRight_toLeftOf="@+id/toolbar3"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
+        app:layout_constraintVertical_bias="0.861" />
 
 </android.support.constraint.ConstraintLayout>
