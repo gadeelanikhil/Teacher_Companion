@@ -54,7 +54,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(settingsAct);
             }
         });
-
+        btnmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent settingsAct=new Intent("teratroopers.teachercompanion.activity_more");
+                startActivity(settingsAct);
+            }
+        });
     }
 
 

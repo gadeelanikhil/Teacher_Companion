@@ -18,8 +18,8 @@
         tools:ignore="MissingConstraints"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintTop_creator="1"
-        tools:layout_editor_absoluteX="-23dp"
-        app:layout_constraintVertical_bias="0.004" />
+        tools:layout_editor_absoluteX="1dp"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView2"

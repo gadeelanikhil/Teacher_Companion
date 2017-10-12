@@ -65,6 +65,7 @@ public class addclass extends AppCompatActivity {
                                             // Code to undo the user's last action
                                         }
                                     }*/
+
                                     a1.setText("");
                                     a2.setText("");
                                     a3.setText("");
@@ -85,6 +86,7 @@ public class addclass extends AppCompatActivity {
                                             tv.animate().alpha(0).setDuration(2000);
                                         }
                                     }, 7500);
+
 
                                 } else {
                                     Toast.makeText(addclass.this, "internal error occurred! please create class with another name",
