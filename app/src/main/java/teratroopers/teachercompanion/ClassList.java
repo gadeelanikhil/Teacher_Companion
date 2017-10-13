@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Color;
 import android.widget.Toast;
-import android.support.v7.app.ActionBar;
+
 
 
 public class ClassList extends AppCompatActivity implements View.OnClickListener {
@@ -65,7 +65,7 @@ public class ClassList extends AppCompatActivity implements View.OnClickListener
                         @Override
                         public boolean onLongClick(View view) {
                             str=view.getTag().toString();
-                            new AlertDialog.Builder(getApplicationContext())
+                            new AlertDialog.Builder(ClassList.this)
                                     .setTitle("Do you want to delete the class "+cname+"  ?")
                                     .setMessage("You can not undo the action")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
