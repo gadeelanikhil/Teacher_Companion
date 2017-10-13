@@ -166,15 +166,21 @@ public class TakeAttendence extends AppCompatActivity {
                         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
                         date = sdf.format(new Date());
                         date="dt"+date;
-                        Cursor res=mydb.retrievedatatodisplayattendance(date,cname);
                         StringBuffer buffer = new StringBuffer();
-                        while (res.moveToNext()) {
+                        try {
+                            Cursor res = mydb.retrievedatatodisplayattendance(date, cname);
+                            while (res.moveToNext()) {
 
-                            buffer.append(res.getString(0)+"=");
-                            buffer.append(res.getString(1)+ "\n");
-                            //buffer.append("Ending Roll :" + res.getString(2) + "\n");
+                                buffer.append(res.getString(0) + "=");
+                                buffer.append(res.getString(1) + "\n");
+                                //buffer.append("Ending Roll :" + res.getString(2) + "\n");
+                            }
+                            showmessage("Today's Attendance", buffer.toString());
                         }
-                        showmessage("Data", buffer.toString());
+                        catch(Exception x){
+                            buffer.append("Attendance not taken today");
+                            showmessage("Uh-Oh!",buffer.toString());
+                        }
                     }
                 }
         );
@@ -183,7 +189,7 @@ public class TakeAttendence extends AppCompatActivity {
     public void showmessage(String title,String Message) {
         AlertDialog.Builder builder = new  AlertDialog.Builder(this);
         builder.setCancelable(true);
-        builder.setTitle("Today's Attendance");
+       // builder.setTitle("");
         builder.setIcon(R.drawable.book);
         builder.setMessage(Message);
         builder.show();

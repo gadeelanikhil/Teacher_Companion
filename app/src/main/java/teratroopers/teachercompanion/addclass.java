@@ -14,12 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.spark.submitbutton.SubmitButton;
+
 
 public class addclass extends AppCompatActivity {
     mydbhelper mydb;
     EditText a1,a2,a3;
     Button viw;
     FloatingActionButton fab;
+    SubmitButton sbn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,10 @@ public class addclass extends AppCompatActivity {
         a2 = (EditText) findViewById(R.id.sr);
         a3 = (EditText) findViewById(R.id.er);
         viw=(Button)findViewById(R.id.button6);
-        fab=(FloatingActionButton)findViewById(R.id.floatingActionButton);
+        //fab=(FloatingActionButton)findViewById(R.id.floatingActionButton);
+        sbn=(SubmitButton)findViewById(R.id.sub);
+        sbn.bringToFront();
+
         animateImg();
         confirmfab();
         back();
@@ -43,7 +49,7 @@ public class addclass extends AppCompatActivity {
     public void confirmfab()
     {
 
-        fab.setOnClickListener(
+        sbn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -58,46 +64,28 @@ public class addclass extends AppCompatActivity {
                                 boolean isInserted=mydb.dbname(cname,sr,er);
                                 // boolean isInserted = mydb.insertData(cname, sr, er);
                                 if (isInserted == true) {
-                                   Toast.makeText(addclass.this, "Data saved successfully", Toast.LENGTH_SHORT).show();
-                                   /* Snackbar mySnackbar = Snackbar.make(findViewById(R.id.addclass),
-                                            "Class Added", Snackbar.LENGTH_SHORT);
-                                   // mySnackbar.setAction("UNDO", new MyUndoListener());//
-                                    mySnackbar.show();
-                                  /*  public class MyUndoListener implements View.OnClickListener{
-
-                                        @Override
-                                        public void onClick(View v) {
-
-                                            // Code to undo the user's last action
-                                        }
-                                    }*/
-
                                     a1.setText("");
                                     a2.setText("");
                                     a3.setText("");
 
-
                                 } else {
-                                    Toast.makeText(addclass.this, "internal error occurred! please create class with another name",
+                                    sbn.setAlpha(0);
+                                    final Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            sbn.setAlpha(1);
+                                        }
+                                    }, 2000);
+                                    Toast.makeText(addclass.this, "Class with same name exists!",
                                             Toast.LENGTH_SHORT).show();
-                                  /*  Snackbar mineSnackBar = Snackbar.make(findViewById(R.id.addclass),
-                                            "Something went wrong! Please Create class with another name", Snackbar.LENGTH_SHORT);
-                                    mineSnackBar.show();*/
-
                                 }
                             }
                             else {
                                Toast.makeText(addclass.this, "Start Roll_no should be less than End Roll_no", Toast.LENGTH_SHORT).show();
-
-                               /* Snackbar minSnackBar = Snackbar.make(findViewById(R.id.addclass),
-                                        "Start Roll_no should be less than End Roll_no", Snackbar.LENGTH_SHORT);
-                                minSnackBar.show();*/
                             }
                         }
                         catch (Exception e) {
-                           /* Snackbar miSnackBar = Snackbar.make(findViewById(R.id.addclass),
-                                    "Something is wrong! Please try again", Snackbar.LENGTH_SHORT);
-                            miSnackBar.show();*/
                             Toast.makeText(addclass.this, "Enter data in all fields", Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -21,7 +21,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     LinearLayout linearLayout;
     int i;
     String cname;
-    String str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -66,12 +66,12 @@ public class ClassList extends AppCompatActivity implements View.OnClickListener
                         public boolean onLongClick(View view) {
                             str=view.getTag().toString();
                             new AlertDialog.Builder(ClassList.this)
-                                    .setTitle("Do you want to delete the class "+cname+"  ?")
+                                    .setTitle("Do you want to delete the class "+str+"  ?")
                                     .setMessage("You can not undo the action")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                         public void onClick(DialogInterface dialog, int whichButton) {
-                                            Toast.makeText(getApplicationContext(),cname+" is deleted from the records",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(),str+" is deleted from the records",Toast.LENGTH_SHORT).show();
                                             mydb.deleteclass(str);
                                         }})
                                     .setNegativeButton(android.R.string.no, null).show();
