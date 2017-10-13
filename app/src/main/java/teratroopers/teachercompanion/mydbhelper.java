@@ -39,12 +39,14 @@ public class mydbhelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentvalues = new ContentValues();
 
+
         //contentvalues.put(COL1, classname);
         //contentvalues.put(COL2, roll1);
         //contentvalues.put(COL3, roll2);
 
         for(int i=sr;i<=er;i++) {
             contentvalues.put(COL1, i);
+            contentvalues.put(COL2,"");
             long result = sqLiteDatabase.insert(TABLE_NAME, null, contentvalues);
             if (result == -1) {
                 k= false;
@@ -170,5 +172,16 @@ public class mydbhelper extends SQLiteOpenHelper {
         else return false;
     }
 
+    public Cursor retrievedata(String cname){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor res=db.rawQuery("select * from "+cname,null);
+        return res;
+    }
+
+    public Cursor retrievedata2(String cname,String colName){
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor res=db.rawQuery("select "+colName+" from "+cname,null);
+        return res;
+    }
 
 }

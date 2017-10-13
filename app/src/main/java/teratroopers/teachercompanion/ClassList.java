@@ -24,7 +24,6 @@ import android.widget.Toast;
 public class ClassList extends AppCompatActivity implements View.OnClickListener {
 
     mydbhelper mydb;
-
     Button b1;
     LinearLayout linearLayout;
     int i;
@@ -43,11 +42,8 @@ public class ClassList extends AppCompatActivity implements View.OnClickListener
 
     public void createCards(){
         LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,150);
-        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 5);
         lp1.setMargins(20, 20, 20, 10); //ltrd
         final Cursor res=mydb.getalldata();
-        final Handler handler = new Handler();
-
         while (res.moveToNext()) {
             i=0;
             cname=res.getString(0);
@@ -88,7 +84,6 @@ public class ClassList extends AppCompatActivity implements View.OnClickListener
 
     public void onClick(View v) {
         String str=v.getTag().toString();
-        //Toast.makeText(getActivity(),str+" clicked",Toast.LENGTH_SHORT).show();
         Intent intent=new Intent("teratroopers.teachercompanion.TakeAttendence");
         intent.putExtra("name",str);
         startActivity(intent);
