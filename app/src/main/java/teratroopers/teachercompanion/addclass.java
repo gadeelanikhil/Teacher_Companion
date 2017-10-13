@@ -19,7 +19,6 @@ public class addclass extends AppCompatActivity {
     mydbhelper mydb;
     EditText a1,a2,a3;
     Button viw;
-    TextView tv;
     FloatingActionButton fab;
 
     @Override
@@ -27,13 +26,14 @@ public class addclass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addclass);
         mydb =new mydbhelper(this);
-        a1 = (EditText) findViewById(R.id.editText);
-        a2 = (EditText) findViewById(R.id.editText2);
-        a3 = (EditText) findViewById(R.id.editText3);
+        a1 = (EditText) findViewById(R.id.name);
+        a2 = (EditText) findViewById(R.id.sr);
+        a3 = (EditText) findViewById(R.id.er);
         viw=(Button)findViewById(R.id.button6);
         fab=(FloatingActionButton)findViewById(R.id.floatingActionButton);
         animateImg();
         confirmfab();
+        back();
 
     }
     public void animateImg(){
@@ -75,23 +75,6 @@ public class addclass extends AppCompatActivity {
                                     a1.setText("");
                                     a2.setText("");
                                     a3.setText("");
-                                    tv=(TextView)findViewById(R.id.classaddtext);
-                                    final Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            // Do something after 5s = 5000ms
-                                            tv.animate().alpha(1).setDuration(2000);
-                                        }
-                                    }, 3000);
-
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            // Do something after 5s = 5000ms
-                                            tv.animate().alpha(0).setDuration(2000);
-                                        }
-                                    }, 7500);
 
 
                                 } else {
@@ -120,6 +103,15 @@ public class addclass extends AppCompatActivity {
                     }
                 }
         );
+    }
+    public void back(){
+        Button back =(Button)findViewById(R.id.backbutton);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
 }

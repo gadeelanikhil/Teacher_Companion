@@ -75,7 +75,7 @@
         tools:layout_constraintTop_creator="1">
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/name"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -88,7 +88,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editText6"
+            android:id="@+id/sr"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -101,7 +101,7 @@
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/editText7"
+            android:id="@+id/er"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="194dp"
@@ -132,7 +132,7 @@
         app:layout_constraintVertical_bias="0.333" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/backbutton"
         android:layout_width="32dp"
         android:layout_height="33dp"
         android:layout_marginStart="12dp"

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="teratroopers.teachercompanion">
+    package="teratroopers.teachercompanion"
+    xmlns:tools="http://schemas.android.com/tools">
+
 
     <application
+        tools:replace="android:label"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Teacher Companion"
@@ -39,6 +42,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ClassList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+
             <intent-filter>
                 <action android:name="teratroopers.teachercompanion.ClassList" />
 
@@ -48,6 +55,20 @@
         <activity android:name=".activity_more">
             <intent-filter>
                 <action android:name="teratroopers.teachercompanion.activity_more" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Register">
+            <intent-filter>
+                <action android:name="teratroopers.teachercompanion.Register" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RegisterForm">
+            <intent-filter>
+                <action android:name="teratroopers.teachercompanion.RegisterForm" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

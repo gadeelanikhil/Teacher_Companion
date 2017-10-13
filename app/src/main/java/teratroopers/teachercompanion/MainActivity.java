@@ -61,7 +61,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(settingsAct);
             }
         });
+        btnregister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent register=new Intent("teratroopers.teachercompanion.Register");
+                startActivity(register);
+            }
+        });
     }
-
 
 }
