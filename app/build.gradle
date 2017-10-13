@@ -18,7 +18,11 @@ android {
         }
     }
 }
-
+repositories{
+    maven{
+        url 'https://dl.bintray.com/spark/maven'
+    }
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -35,6 +39,8 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:10.0.1'
     compile 'me.spark:submitbutton:1.0.1'
     testCompile 'junit:junit:4.12'
+
+
 }
 
 

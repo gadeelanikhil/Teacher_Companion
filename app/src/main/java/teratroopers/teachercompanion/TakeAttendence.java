@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -45,6 +46,7 @@ public class TakeAttendence extends AppCompatActivity {
     public Context context;
     TextView tv;
     int count=0;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,8 @@ public class TakeAttendence extends AppCompatActivity {
         presentButton();
         absentButton();
         buttonclickfordisplayingvalues();
+
+
     }
 
     public void getValues(String name) {
@@ -115,6 +119,17 @@ public class TakeAttendence extends AppCompatActivity {
                                             finish();
                                         }
                                     }).show();
+                            presbutton=(Button)findViewById(R.id.present);
+                            vibrator=(Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+                            presbutton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //vibrate in ms
+                                    vibrator.vibrate(100);
+                                }
+                            });
+
                         }
                     }
                 }
@@ -125,37 +140,71 @@ public class TakeAttendence extends AppCompatActivity {
         a=sroll;
         total=(eroll-sroll)+1;
         absbutton=(Button)findViewById(R.id.absent);
+        absbutton = (Button) findViewById(R.id.absent);
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        absbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //vibrate in ms
+                vibrator.vibrate(100);
+            }
+
+        });
         absbutton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
                         date = sdf.format(new Date());
-                        date="dt"+date;
-                        if(droll<eroll) {
+                        date = "dt" + date;
+                        if (droll < eroll) {
                             if (droll == sroll) {
-                                mydb.alterTable(date,cname);
+                                mydb.alterTable(date, cname);
                             }
-                            mydb.registerData(date,cname,droll,0);
+                            mydb.registerData(date, cname, droll, 0);
                             droll++;
                             display();
-                        }
-                        else if(droll==eroll){
-                            mydb.registerData(date,cname, droll, 0);
+                        } else if (droll == eroll) {
+                            mydb.registerData(date, cname, droll, 0);
                             //disbutton.setText("Attendance complete");
                             absbutton.setClickable(false);
-                            Snackbar.make(view,"Attendance Complete",Snackbar.LENGTH_INDEFINITE)
-                                    .setAction("Return",new View.OnClickListener(){
+                            Snackbar.make(view, "Attendance Complete", Snackbar.LENGTH_INDEFINITE)
+                                    .setAction("Return", new View.OnClickListener() {
                                         @Override
                                         public void onClick(View view) {
                                             finish();
                                         }
                                     }).show();
+
+                            absbutton = (Button) findViewById(R.id.absent);
+                            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+                            absbutton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //vibrate in ms
+                                    vibrator.vibrate(100);
+                                }
+
+                            });
+
+
+
+
+
                         }
                     }
                 }
         );
     }
+
+
+
+
+
+
+
+
+
 
     public void buttonclickfordisplayingvalues(){
         FloatingActionButton  butt = (FloatingActionButton) findViewById(R.id.floatingActionButton2);
@@ -184,6 +233,8 @@ public class TakeAttendence extends AppCompatActivity {
                     }
                 }
         );
+
+
     }
 
     public void showmessage(String title,String Message) {
