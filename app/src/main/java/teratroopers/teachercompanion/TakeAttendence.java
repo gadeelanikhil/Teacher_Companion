@@ -89,10 +89,12 @@ public class TakeAttendence extends AppCompatActivity {
     public void presentButton(){
         total=(eroll-sroll)+1;
         presbutton=(Button)findViewById(R.id.present);
+        vibrator=(Vibrator) getSystemService(VIBRATOR_SERVICE);
         presbutton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        vibrator.vibrate(50);
                         count++;
                         pres=String.valueOf(count);
                         tv.setText(pres+"/"+k+" present");
@@ -119,16 +121,6 @@ public class TakeAttendence extends AppCompatActivity {
                                             finish();
                                         }
                                     }).show();
-                            presbutton=(Button)findViewById(R.id.present);
-                            vibrator=(Vibrator) getSystemService(VIBRATOR_SERVICE);
-
-                            presbutton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    //vibrate in ms
-                                    vibrator.vibrate(100);
-                                }
-                            });
 
                         }
                     }
@@ -142,18 +134,11 @@ public class TakeAttendence extends AppCompatActivity {
         absbutton=(Button)findViewById(R.id.absent);
         absbutton = (Button) findViewById(R.id.absent);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        absbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //vibrate in ms
-                vibrator.vibrate(100);
-            }
-
-        });
         absbutton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        vibrator.vibrate(50);
                         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
                         date = sdf.format(new Date());
                         date = "dt" + date;
@@ -175,22 +160,6 @@ public class TakeAttendence extends AppCompatActivity {
                                             finish();
                                         }
                                     }).show();
-
-                            absbutton = (Button) findViewById(R.id.absent);
-                            vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-                            absbutton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    //vibrate in ms
-                                    vibrator.vibrate(100);
-                                }
-
-                            });
-
-
-
-
-
                         }
                     }
                 }
