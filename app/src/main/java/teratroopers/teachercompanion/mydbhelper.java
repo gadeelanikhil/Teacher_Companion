@@ -6,15 +6,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class mydbhelper extends SQLiteOpenHelper {
     public static final String DATABSE_NAME="student.sqLiteDatabase";
     public static  String TABLE_NAME;
     public static final String cTABLE_NAME="cTABLE";
     public static final String COL1="rollnos";
     public static final String COL2="studnames";
+    public static final String COL3="count";
     public static final String CTCOL1="classname";
+    public static final String CTCOL2="total";
+    public List<Integer> list = new ArrayList<>();
+    public List<Integer> li = new ArrayList<>();
+
     boolean k=false;
     boolean p;
+    int g,count;
+    Cursor req;
 
 
     public mydbhelper(Context context) {
@@ -26,7 +36,7 @@ public class mydbhelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         this.sqLiteDatabase=sqLiteDatabase;
         Log.i("info",sqLiteDatabase.toString());
-        sqLiteDatabase.execSQL("create table "+cTABLE_NAME+"("+CTCOL1+" TEXT);");
+        sqLiteDatabase.execSQL("create table "+cTABLE_NAME+"("+CTCOL1+" TEXT,"+CTCOL2+" INTEGER);");
     }
 
     @Override
@@ -39,7 +49,6 @@ public class mydbhelper extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentvalues = new ContentValues();
 
-
         //contentvalues.put(COL1, classname);
         //contentvalues.put(COL2, roll1);
         //contentvalues.put(COL3, roll2);
@@ -47,6 +56,7 @@ public class mydbhelper extends SQLiteOpenHelper {
         for(int i=sr;i<=er;i++) {
             contentvalues.put(COL1, i);
             contentvalues.put(COL2,"");
+            contentvalues.put(COL3,0);
             long result = sqLiteDatabase.insert(TABLE_NAME, null, contentvalues);
             if (result == -1) {
                 k= false;
@@ -74,15 +84,16 @@ public class mydbhelper extends SQLiteOpenHelper {
         TABLE_NAME=cname;
         Log.i("tname",TABLE_NAME);
 
-        sqLiteDatabase.execSQL("create table if not exists "+TABLE_NAME+"("+COL1+" INTEGER,"+COL2+ " TEXT);");
+        sqLiteDatabase.execSQL("create table if not exists "+TABLE_NAME+"("+COL1+" INTEGER,"+COL2+ " TEXT, "+COL3+" INTEGER);");
         boolean c=checkclassname();
         if(c==true) {
             contentvalues.put(CTCOL1,TABLE_NAME);
+            contentvalues.put(CTCOL2,0);
             sqLiteDatabase.insert(cTABLE_NAME, null, contentvalues);
 
             Log.i("class table insertion:", "success");
             k = insertData(sr, er);
-            Log.i("our table data:", "success");
+            Log.i("our nikhil:", "success");
             return k;
         }
         else return false;
@@ -112,7 +123,7 @@ public class mydbhelper extends SQLiteOpenHelper {
 
     public void alterTable(String date,String cname){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
-        boolean k=isFieldExist(cname,"DATE");
+        boolean k=isFieldExist(cname,date);
         if(k) {
             try{
                 sqLiteDatabase.execSQL("alter table " + cname + " add "+date+" INTEGER");
@@ -126,7 +137,7 @@ public class mydbhelper extends SQLiteOpenHelper {
         }
         else {
             p=false;
-            Log.i("Attendance taken:","finish");
+            Log.i("column alreadyis taken:","finish");
         }
     }
 
@@ -142,18 +153,34 @@ public class mydbhelper extends SQLiteOpenHelper {
 
     public Cursor retrievedatatodisplayattendance(String date,String classname){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
-        Cursor result = sqLiteDatabase.rawQuery("Select "+COL1+"," + date +" from " + classname,null);
+        Cursor result = sqLiteDatabase.rawQuery("Select "+COL1+"," + COL3+","+ date +" from " + classname,null);
         return result;
     }
 
-    public void registerData(String date,String cname,int droll,int i){
-        SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
-        if(p==true) {
-            sqLiteDatabase.execSQL("UPDATE " + cname + " SET "+date+" = "+i+ " WHERE " + COL1 + " = " + droll);
-            Log.i("update complete:", "success");
-        }
-        else{
-            sqLiteDatabase.execSQL("UPDATE " + cname + " SET "+date+" = "+date+ " + "+i + " WHERE " + COL1 + " = " + droll);
+    public void registerData(String date,String cname,int droll,int i,int sroll,int eroll){
+        li.add(droll);
+        list.add(i);
+        g=droll;
+        if(g==eroll) {
+            SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+            for(i=0;i<(eroll-sroll)+1;i++) {
+                if(sroll==li.get(i)){
+                    count=0;
+                }
+                if(count==0){
+                    sqLiteDatabase.execSQL("UPDATE " + cTABLE_NAME + " SET " + CTCOL2 + " = " + CTCOL2 + " + " + 1 + " WHERE " + CTCOL1 + " = " + "'" +cname + "'");
+                    count++;
+                }
+                if (p == true) {
+                    sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + date + " = " + list.get(i) + " WHERE " + COL1 + " = " + li.get(i));
+                    sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + COL3 + " = " + COL3 + " + " + list.get(i) + " WHERE " + COL1 + " = " + li.get(i));
+
+                    Log.i("update complete:", "success");
+                } else {
+                    sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + date + " = " + date + " + " + list.get(i) + " WHERE " + COL1 + " = " + li.get(i));
+                    sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + COL3 + " = " + COL3 + " + " + list.get(i) + " WHERE " + COL1 + " = " + li.get(i));
+                }
+            }
         }
 
     }
@@ -171,17 +198,14 @@ public class mydbhelper extends SQLiteOpenHelper {
         }
         else return false;
     }
-
     public Cursor retrievedata(String cname){
-        SQLiteDatabase db=this.getReadableDatabase();
-        Cursor res=db.rawQuery("select * from "+cname,null);
-        return res;
+        SQLiteDatabase db = this.getWritableDatabase();
+         req = db.rawQuery("Select * from "+cname,null);
+        return req;
     }
 
-    public Cursor retrievedata2(String cname,String colName){
-        SQLiteDatabase db=this.getReadableDatabase();
-        Cursor res=db.rawQuery("select "+colName+" from "+cname,null);
-        return res;
-    }
 
 }
+
+
+
