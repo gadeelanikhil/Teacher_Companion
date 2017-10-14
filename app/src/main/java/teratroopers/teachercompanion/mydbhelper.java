@@ -203,6 +203,20 @@ public class mydbhelper extends SQLiteOpenHelper {
          req = db.rawQuery("Select * from "+cname,null);
         return req;
     }
+    public Cursor statistics(String cname){
+        SQLiteDatabase db = this.getWritableDatabase();
+       // req = db.rawQuery("Select * from "+cname,null);
+        req =db.rawQuery("Select "+COL1+"," + COL3 + " from " + cname,null);
+        return req;
+    }
+    public Cursor statistics1(String cname){
+        SQLiteDatabase db = this.getWritableDatabase();
+        // req = db.rawQuery("Select * from "+cname,null);
+        //req =db.rawQuery("Select "+COL1+"," + COL3 + ", from " + cname,null);
+        Cursor result = db.rawQuery("Select " +CTCOL2 + " from " + cTABLE_NAME + " where " + CTCOL1 + "=" + "'"+cname+"'", null);
+        return result;
+    }
+
 
 
 }

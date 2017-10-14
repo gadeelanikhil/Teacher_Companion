@@ -68,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(register);
             }
         });
+        btnstatistics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent stats =new Intent("teratroopers.teachercompanion.activity_statistics");
+                startActivity(stats);
+            }
+        });
     }
 
 }

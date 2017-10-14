@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="teratroopers.teachercompanion"
-    xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    xmlns:tools="http://schemas.android.com/tools"
+    package="teratroopers.teachercompanion">
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
-        tools:replace="android:label"
         android:allowBackup="true"
         android:icon="@drawable/select"
         android:label="Teacher Companion"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/tc_theme">
+        android:theme="@style/tc_theme"
+        tools:replace="android:label">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,6 +73,14 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity android:name=".activity_statistics">
+            <intent-filter>
+                <action android:name="teratroopers.teachercompanion.activity_statistics" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
         </activity>
     </application>
 

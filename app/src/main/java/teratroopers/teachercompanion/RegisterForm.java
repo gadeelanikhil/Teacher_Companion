@@ -1,5 +1,5 @@
-package teratroopers.teachercompanion;
 
+package teratroopers.teachercompanion;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
