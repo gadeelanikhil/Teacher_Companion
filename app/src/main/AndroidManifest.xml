@@ -6,7 +6,7 @@
     <application
         tools:replace="android:label"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/select"
         android:label="Teacher Companion"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
