@@ -36,7 +36,7 @@ public class mydbhelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         this.sqLiteDatabase=sqLiteDatabase;
         Log.i("info",sqLiteDatabase.toString());
-        sqLiteDatabase.execSQL("create table "+cTABLE_NAME+"("+CTCOL1+" TEXT,"+CTCOL2+" INTEGER);");
+        sqLiteDatabase.execSQL("create table "+cTABLE_NAME+"("+CTCOL1+" TEXT, "+CTCOL2+" INTEGER);");
     }
 
     @Override

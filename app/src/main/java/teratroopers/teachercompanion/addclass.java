@@ -25,8 +25,6 @@ import com.spark.submitbutton.SubmitButton;
 public class addclass extends AppCompatActivity {
     mydbhelper mydb;
     EditText a1,a2,a3;
-    Button viw;
-    FloatingActionButton fab;
     SubmitButton sbn;
 
     @Override
@@ -34,26 +32,22 @@ public class addclass extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addclass);
         mydb =new mydbhelper(this);
-        a1 = (EditText) findViewById(R.id.name);
-        a2 = (EditText) findViewById(R.id.sr);
-        a3 = (EditText) findViewById(R.id.er);
-        viw=(Button)findViewById(R.id.button6);
-        //fab=(FloatingActionButton)findViewById(R.id.floatingActionButton);
-        sbn=(SubmitButton)findViewById(R.id.sub);
-        sbn.bringToFront();
-
         animateImg();
-        confirmfab();
+        confirmsbn();
         back();
-
     }
+
     public void animateImg(){
         ImageView addclassimg=(ImageView)findViewById(R.id.addimg);
         addclassimg.animate().rotation(360).setDuration(900);
     }
-    public void confirmfab()
-    {
 
+    public void confirmsbn() {
+        sbn=(SubmitButton)findViewById(R.id.sub);
+        a1 = (EditText) findViewById(R.id.name);
+        a2 = (EditText) findViewById(R.id.sr);
+        a3 = (EditText) findViewById(R.id.er);
+        sbn.bringToFront();
         sbn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -67,7 +61,6 @@ public class addclass extends AppCompatActivity {
 
                             if (sr < er) {
                                 boolean isInserted=mydb.dbname(cname,sr,er);
-                                // boolean isInserted = mydb.insertData(cname, sr, er);
                                 if (isInserted == true) {
                                     a1.setText("");
                                     a2.setText("");
@@ -87,10 +80,26 @@ public class addclass extends AppCompatActivity {
                                 }
                             }
                             else {
-                               Toast.makeText(addclass.this, "Start Roll_no should be less than End Roll_no", Toast.LENGTH_SHORT).show();
+                                sbn.setAlpha(0);
+                                final Handler handler = new Handler();
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        sbn.setAlpha(1);
+                                    }
+                                }, 2000);
+                                Toast.makeText(addclass.this, "Start Roll no should be less than End Roll no", Toast.LENGTH_SHORT).show();
                             }
                         }
                         catch (Exception e) {
+                            sbn.setAlpha(0);
+                            final Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    sbn.setAlpha(1);
+                                }
+                            }, 2000);
                             Toast.makeText(addclass.this, "Enter data in all fields", Toast.LENGTH_SHORT).show();
                         }
                     }

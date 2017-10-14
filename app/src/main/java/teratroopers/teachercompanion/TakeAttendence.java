@@ -1,13 +1,9 @@
 package teratroopers.teachercompanion;
 
-import android.app.ProgressDialog;
-import java.net.*;
-import java.io.*;
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.Vibrator;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -16,14 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -43,6 +31,7 @@ public class TakeAttendence extends AppCompatActivity {
     public Context context;
     TextView tv;
     int count=0;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +41,8 @@ public class TakeAttendence extends AppCompatActivity {
         mydb =new mydbhelper(this);
         Bundle b = getIntent().getExtras();
         cname = b.getString("name");
+
+        vibrator=(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         //goToClass gtc=new goToClass(cname);
         getValues(cname);
         display();
@@ -71,7 +62,7 @@ public class TakeAttendence extends AppCompatActivity {
         res.moveToLast();
         eroll = Integer.parseInt(res.getString(0));
         tv=(TextView)findViewById(R.id.count);
-        k=String.valueOf(eroll);
+        k=String.valueOf((eroll-sroll)+1);
         pres="0";
         tv.setText(pres+"/"+k+" present");
     }
@@ -87,6 +78,7 @@ public class TakeAttendence extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        vibrator.vibrate(50);
                         count++;
                         pres=String.valueOf(count);
                         tv.setText(pres+"/"+k+" present");
@@ -127,6 +119,7 @@ public class TakeAttendence extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        vibrator.vibrate(50);
                         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
                         date = sdf.format(new Date());
                         date="dt"+date;

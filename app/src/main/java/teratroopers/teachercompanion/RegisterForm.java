@@ -39,7 +39,7 @@ public class RegisterForm extends AppCompatActivity {
             if(k.startsWith("1") || k.startsWith("2") || k.startsWith("3") || k.startsWith("4")|| k.startsWith("5")
                     || k.startsWith("6")|| k.startsWith("7")|| k.startsWith("8")|| k.startsWith("9")|| k.startsWith("0")){
 
-                str.insert(2,'/');
+                str.insert(2,':');
                 str.insert(5,'/');
                 str.insert(8,'/');
                 k=str.toString();
@@ -48,24 +48,6 @@ public class RegisterForm extends AppCompatActivity {
             p++;
         }
 
-       /*if (result.isBeforeFirst()) {
-            while (result.moveToNext()) {
-                try {
-                    if (result.getString(i) != null) {
-                        rolls.add(result.getString(i));
-                        Log.i("messagey:::", rolls.get(i));
-                        i++;
-                    }
-                    if (result.getString(i) == null) {
-                        rolls.add("");
-                        Log.i("messagey:::", "nothing here (space)");
-                        i++;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }*/
        classData=new String[result.getCount()][result.getColumnNames().length];
        result.moveToFirst();
         for(int i=0;i<result.getCount();i++){
@@ -86,9 +68,7 @@ public class RegisterForm extends AppCompatActivity {
                 tableView.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
                 tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(this, classColNames));
                 tableView.setColumnCount(result.getColumnCount());
-
-               tableView.setDataAdapter(new SimpleTableDataAdapter(this, classData));
-
+                tableView.setDataAdapter(new SimpleTableDataAdapter(this, classData));
 
                 tableView.addDataClickListener(new TableDataClickListener() {
                     @Override
