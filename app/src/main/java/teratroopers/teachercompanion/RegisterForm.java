@@ -6,6 +6,7 @@ import android.os.Bundle;
 import de.codecrafters.tableview.TableView;
 import android.graphics.Color;
 import de.codecrafters.tableview.listeners.TableDataClickListener;
+import de.codecrafters.tableview.model.TableColumnDpWidthModel;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
@@ -63,12 +64,18 @@ public class RegisterForm extends AppCompatActivity {
         }
 
 
-                final TableView<String[]> tableView = (TableView<String[]>) findViewById(R.id.tableView);
+        final TableView<String[]> tableView = (TableView<String[]>) findViewById(R.id.tableView);
 
-                tableView.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
-                tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(this, classColNames));
-                tableView.setColumnCount(result.getColumnCount());
-                tableView.setDataAdapter(new SimpleTableDataAdapter(this, classData));
+        tableView.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
+        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(this, classColNames));
+        tableView.setColumnCount(result.getColumnCount());
+        tableView.setDataAdapter(new SimpleTableDataAdapter(this, classData));
+
+        //comment the following code if there's any error
+        TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(this,result.getColumnCount(),200);
+        columnModel.setColumnWidth(1, 100);
+        columnModel.setColumnWidth(2, 200);
+        tableView.setColumnModel(columnModel);
 
                 tableView.addDataClickListener(new TableDataClickListener() {
                     @Override

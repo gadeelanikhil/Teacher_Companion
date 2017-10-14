@@ -98,6 +98,7 @@ public class TakeAttendence extends AppCompatActivity {
                             mydb.registerData(date,cname, droll, 1,sroll,eroll);
                             // disbutton.setText("Attendance complete");
                             presbutton.setClickable(false);
+                            absbutton.setClickable(false);
                             Snackbar.make(view,"Attendance Complete",Snackbar.LENGTH_INDEFINITE)
                                     .setAction("Return",new View.OnClickListener(){
                                         @Override
@@ -133,8 +134,8 @@ public class TakeAttendence extends AppCompatActivity {
                         }
                         else if(droll==eroll){
                             mydb.registerData(date,cname, droll, 0,sroll,eroll);
-                            //disbutton.setText("Attendance complete");
                             absbutton.setClickable(false);
+                            presbutton.setClickable(false);
                             Snackbar.make(view,"Attendance Complete",Snackbar.LENGTH_INDEFINITE)
                                     .setAction("Return",new View.OnClickListener(){
                                         @Override
