@@ -48,7 +48,7 @@ public class RegisterForm extends AppCompatActivity {
             p++;
         }
 
-       /* if (result.isBeforeFirst()) {
+       /*if (result.isBeforeFirst()) {
             while (result.moveToNext()) {
                 try {
                     if (result.getString(i) != null) {
