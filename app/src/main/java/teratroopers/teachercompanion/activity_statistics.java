@@ -84,11 +84,12 @@ public class activity_statistics extends AppCompatActivity implements View.OnCli
     }
     public void onClick(View v) {
         String str=v.getTag().toString();
+
         //Toast.makeText(getActivity(),str+" clicked",Toast.LENGTH_SHORT).show();
-        //Intent intent=new Intent("teratroopers.teachercompanion.TakeAttendence");
-        //intent.putExtra("name",str);
-        //startActivity(intent);
-        test1(str);
+        Intent intent=new Intent("teratroopers.teachercompanion.statistics");
+        intent.putExtra("name",str);
+        startActivity(intent);
+        //test1(str);
 
     }
     public void back(){

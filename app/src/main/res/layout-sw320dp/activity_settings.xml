@@ -9,16 +9,16 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar4"
         android:layout_width="400dp"
-        android:layout_height="350dp"
-        android:layout_marginBottom="218dp"
+        android:layout_height="220dp"
+        android:layout_marginBottom="347dp"
         android:background="?android:attr/colorAccent"
         android:elevation="0dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints"
         tools:layout_constraintBottom_creator="1"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteX="-4dp" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -27,11 +27,24 @@
         app:srcCompat="@drawable/gear"
         tools:layout_constraintTop_creator="1"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="76dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/textView10"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        android:layout_marginLeft="5dp" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vibration  "
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.522" />
 
     <TextView
         android:id="@+id/textView10"
@@ -49,4 +62,17 @@
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         tools:ignore="HardcodedText" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BackUp and Restore  "
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.223"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.637" />
+
 </android.support.constraint.ConstraintLayout>

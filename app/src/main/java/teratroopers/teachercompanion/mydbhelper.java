@@ -13,10 +13,12 @@ public class mydbhelper extends SQLiteOpenHelper {
     public static final String DATABSE_NAME="student.sqLiteDatabase";
     public static  String TABLE_NAME;
     public static final String cTABLE_NAME="cTABLE";
+    public static final String settings="Settings";
     public static final String COL1="rollnos";
     public static final String COL2="studnames";
     public static final String COL3="count";
     public static final String CTCOL1="classname";
+    public static final String CL1="vibration";
     public static final String CTCOL2="total";
     public List<Integer> list = new ArrayList<>();
     public List<Integer> li = new ArrayList<>();
@@ -35,8 +37,13 @@ public class mydbhelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         this.sqLiteDatabase=sqLiteDatabase;
+        ContentValues contentvalues = new ContentValues();
         Log.i("info",sqLiteDatabase.toString());
         sqLiteDatabase.execSQL("create table "+cTABLE_NAME+"("+CTCOL1+" TEXT, "+CTCOL2+" INTEGER);");
+        sqLiteDatabase.execSQL("create table "+settings+"("+CL1+" INTEGER );");
+        contentvalues.put(CL1,0);
+        sqLiteDatabase.insert(settings, null, contentvalues);
+
     }
 
     @Override
@@ -215,6 +222,24 @@ public class mydbhelper extends SQLiteOpenHelper {
         //req =db.rawQuery("Select "+COL1+"," + COL3 + ", from " + cname,null);
         Cursor result = db.rawQuery("Select " +CTCOL2 + " from " + cTABLE_NAME + " where " + CTCOL1 + "=" + "'"+cname+"'", null);
         return result;
+    }
+    public void vibration(int a){
+        if(a==1){
+            try {
+                SQLiteDatabase db = this.getWritableDatabase();
+                db.execSQL("UPDATE " + settings + " SET " + CL1 + " = 1 where " + CL1 + "= 0");
+            }
+            catch (Exception e){
+
+            }
+        }
+    }
+    public int vibration1(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery("select *  from "+ settings,null);
+        c.moveToNext();
+        int a = Integer.parseInt(c.getString(0));
+        return  a;
     }
 
 

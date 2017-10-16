@@ -29,12 +29,10 @@ allprojects {
     }
 }
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-
     compile 'de.codecrafters.tableview:tableview:2.2.0'
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -45,7 +43,6 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
     compile 'com.google.firebase:firebase-messaging:10.0.1'
     compile 'me.spark:submitbutton:1.0.1'
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.+'
     testCompile 'junit:junit:4.12'
 }
 
