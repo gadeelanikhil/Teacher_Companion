@@ -43,7 +43,7 @@ public class TakeAttendence extends AppCompatActivity {
         cname = b.getString("name");
 
         vibrator=(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        check();
+       // check();
         //goToClass gtc=new goToClass(cname);
         getValues(cname);
         display();
@@ -79,9 +79,9 @@ public class TakeAttendence extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(b==1) {
+
                             vibrator.vibrate(50);
-                        }
+
                         count++;
                         pres=String.valueOf(count);
                         tv.setText(pres+"/"+k+" present");
@@ -123,9 +123,9 @@ public class TakeAttendence extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(b==1) {
+
                             vibrator.vibrate(50);
-                        }
+
                         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
                         date = sdf.format(new Date());
                         date="dt"+date;

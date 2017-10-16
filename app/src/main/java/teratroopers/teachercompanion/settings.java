@@ -12,11 +12,11 @@ public class settings extends AppCompatActivity {
 
 
     ImageView sett;
-    //Switch s1,s2;
+    Switch s1,s2;
     mydbhelper mydb;
     int a=0;
-    Switch s1=(Switch)findViewById(R.id.switch1);
-    Switch s2=(Switch)findViewById(R.id.switch2);
+    //Switch s1=(Switch)findViewById(R.id.switch1);
+    //Switch s2=(Switch)findViewById(R.id.switch2);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class settings extends AppCompatActivity {
         mydb =new mydbhelper(this);
         animateImage();
         //vibration();
-        vib();
+        //vib();
     }
     public void animateImage(){
         sett=(ImageView)findViewById(R.id.imageView4);
@@ -46,7 +46,8 @@ public class settings extends AppCompatActivity {
     }
     public void vibration(){
 
-
+        s1=(Switch)findViewById(R.id.switch1);
+        s2=(Switch)findViewById(R.id.switch2);
        Boolean b = s1.isChecked();
         //Log.i("message",b);
         if(b){
@@ -57,12 +58,5 @@ public class settings extends AppCompatActivity {
 
     }
 
-    public void vib(){
-        s1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                vibration();
-            }
-        });
-    }
+
 }
