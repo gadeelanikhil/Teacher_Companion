@@ -227,12 +227,13 @@ public class mydbhelper extends SQLiteOpenHelper {
         if(a==1){
             try {
                 SQLiteDatabase db = this.getWritableDatabase();
-                db.execSQL("UPDATE " + settings + " SET " + CL1 + " = 1 where " + CL1 + "= 0");
+                db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 1 where " + CL1 + "= 0");
             }
             catch (Exception e){
 
             }
         }
+
     }
     public int vibration1(){
         SQLiteDatabase db = this.getWritableDatabase();
