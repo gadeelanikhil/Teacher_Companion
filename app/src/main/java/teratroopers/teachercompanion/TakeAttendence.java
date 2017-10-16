@@ -24,7 +24,7 @@ public class TakeAttendence extends AppCompatActivity {
     Button absbutton;
     int total;
     int droll;
-    int a,b;
+    int a;
     String k,pres;
     String date;
     String cname;
@@ -44,13 +44,11 @@ public class TakeAttendence extends AppCompatActivity {
 
         vibrator=(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         //goToClass gtc=new goToClass(cname);
-        check();
         getValues(cname);
         display();
         presentButton();
         absentButton();
         buttonclickfordisplayingvalues();
-
     }
 
     public void getValues(String name) {
@@ -80,9 +78,7 @@ public class TakeAttendence extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(b==1) {
-                            vibrator.vibrate(50);
-                        }
+                        vibrator.vibrate(50);
                         count++;
                         pres=String.valueOf(count);
                         tv.setText(pres+"/"+k+" present");
@@ -124,9 +120,7 @@ public class TakeAttendence extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(b==1){
                         vibrator.vibrate(50);
-                        }
                         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
                         date = sdf.format(new Date());
                         date="dt"+date;
@@ -140,8 +134,6 @@ public class TakeAttendence extends AppCompatActivity {
                         }
                         else if(droll==eroll){
                             mydb.registerData(date,cname, droll, 0,sroll,eroll);
-
-                            //disbutton.setText("Attendance complete");
                             absbutton.setClickable(false);
                             presbutton.setClickable(false);
                             Snackbar.make(view,"Attendance Complete",Snackbar.LENGTH_INDEFINITE)
@@ -188,9 +180,6 @@ public class TakeAttendence extends AppCompatActivity {
         builder.setMessage(Message);
         builder.show();
 
-    }
-    public void check(){
-        b=mydb.vibration1();
     }
 
 }
