@@ -18,13 +18,13 @@ public class mydbhelper extends SQLiteOpenHelper {
     public static final String COL2="studnames";
     public static final String COL3="count";
     public static final String CTCOL1="classname";
-    public static final String CL1="vibration";
+    public static final String CL1="key";
+    public static final String CL2="values";
     public static final String CTCOL2="total";
     public List<Integer> list = new ArrayList<>();
     public List<Integer> li = new ArrayList<>();
 
     boolean k=false;
-    boolean p;
     int g,count;
     Cursor req;
 
@@ -36,14 +36,13 @@ public class mydbhelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        this.sqLiteDatabase=sqLiteDatabase;
+        this.sqLiteDatabase = sqLiteDatabase;
         ContentValues contentvalues = new ContentValues();
-        Log.i("info",sqLiteDatabase.toString());
-        sqLiteDatabase.execSQL("create table "+cTABLE_NAME+"("+CTCOL1+" TEXT, "+CTCOL2+" INTEGER);");
-        sqLiteDatabase.execSQL("create table "+settings+"("+CL1+" INTEGER );");
-        contentvalues.put(CL1,0);
+        Log.i("info", sqLiteDatabase.toString());
+        sqLiteDatabase.execSQL("create table " + cTABLE_NAME + "(" + CTCOL1 + " TEXT, " + CTCOL2 + " INTEGER);");
+        sqLiteDatabase.execSQL("create table " + settings + "(" + CL1 + " INTEGER );");
+        contentvalues.put(CL1, 0);
         sqLiteDatabase.insert(settings, null, contentvalues);
-
     }
 
     @Override
@@ -55,11 +54,6 @@ public class mydbhelper extends SQLiteOpenHelper {
     public boolean insertData( int sr, int er) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentvalues = new ContentValues();
-
-        //contentvalues.put(COL1, classname);
-        //contentvalues.put(COL2, roll1);
-        //contentvalues.put(COL3, roll2);
-
         for(int i=sr;i<=er;i++) {
             contentvalues.put(COL1, i);
             contentvalues.put(COL2,"");
@@ -67,7 +61,8 @@ public class mydbhelper extends SQLiteOpenHelper {
             long result = sqLiteDatabase.insert(TABLE_NAME, null, contentvalues);
             if (result == -1) {
                 k= false;
-            } else {
+            }
+            else {
                 k= true;
             }
         }
@@ -125,38 +120,35 @@ public class mydbhelper extends SQLiteOpenHelper {
         //sqLiteDatabase.execSQL("delete TABLE IF EXISTS " + classname);
         sqLiteDatabase.delete(classname,null,null);
         sqLiteDatabase.delete(cTABLE_NAME,CTCOL1+"="+"'"+classname+"'",null);
+        try {
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + classname);
+        }
+        catch (Exception e){
+            Log.i("deleteclass","exception");
+        }
     }
 
 
-    public void alterTable(String date,String cname){
+    public void alterTable(String date,String cname,int sroll,int eroll){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
+        //ContentValues contentValues = new ContentValues();
         boolean k=isFieldExist(cname,date);
         if(k) {
             try{
                 sqLiteDatabase.execSQL("alter table " + cname + " add "+date+" INTEGER");
                 Log.i("table altered:", "success");
-                p=true;
+                for(int i=sroll;i<=eroll;i++) {
+                    sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + date + " = " + "0" + " WHERE " + COL1 + " = " + i);
+                }
             }
             catch (Exception e){
-                p=false;
                 Log.i("Attendance taken:","finish");
             }
         }
         else {
-            p=false;
             Log.i("column alreadyis taken:","finish");
         }
     }
-
-
-   /* public void atdinsert(String classname){
-        ContentValues contentvalues = new ContentValues();
-        sqLiteDatabase=this.getWritableDatabase();
-        contentvalues.put(COL4,1);
-        Log.i("insertion success","not biscuit");
-        sqLiteDatabase.insert(classname,null,contentvalues);
-        Log.i("after success"," is no use");
-    }*/
 
     public Cursor retrievedatatodisplayattendance(String date,String classname){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
@@ -178,18 +170,10 @@ public class mydbhelper extends SQLiteOpenHelper {
                     sqLiteDatabase.execSQL("UPDATE " + cTABLE_NAME + " SET " + CTCOL2 + " = " + CTCOL2 + " + " + 1 + " WHERE " + CTCOL1 + " = " + "'" +cname + "'");
                     count++;
                 }
-                if (p == true) {
-                    sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + date + " = " + list.get(i) + " WHERE " + COL1 + " = " + li.get(i));
-                    sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + COL3 + " = " + COL3 + " + " + list.get(i) + " WHERE " + COL1 + " = " + li.get(i));
-
-                    Log.i("update complete:", "success");
-                } else {
-                    sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + date + " = " + date + " + " + list.get(i) + " WHERE " + COL1 + " = " + li.get(i));
-                    sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + COL3 + " = " + COL3 + " + " + list.get(i) + " WHERE " + COL1 + " = " + li.get(i));
-                }
+                sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + date + " = " + date + " + " + list.get(i) + " WHERE " + COL1 + " = " + li.get(i));
+                sqLiteDatabase.execSQL("UPDATE " + cname + " SET " + COL3 + " = " + COL3 + " + " + list.get(i) + " WHERE " + COL1 + " = " + li.get(i));
             }
         }
-
     }
 
     public boolean isFieldExist(String tableName, String fieldName)
@@ -233,18 +217,24 @@ public class mydbhelper extends SQLiteOpenHelper {
 
             }
         }
+        else{
+            try {
+                SQLiteDatabase db = this.getWritableDatabase();
+                db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 0 where " + CL1 + "= 1");
+            }
+            catch (Exception e){
 
+            }
+        }
     }
     public int vibration1(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor c = db.rawQuery("select *  from "+ settings,null);
+        int a;
+        Cursor c = db.rawQuery("select * from "+ settings ,null);
         c.moveToNext();
-        int a = Integer.parseInt(c.getString(0));
+        a = c.getInt(0);
         return  a;
     }
-
-
-
 }
 
 

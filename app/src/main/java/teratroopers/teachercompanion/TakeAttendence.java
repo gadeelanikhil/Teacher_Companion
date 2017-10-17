@@ -43,7 +43,7 @@ public class TakeAttendence extends AppCompatActivity {
         cname = b.getString("name");
 
         vibrator=(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-       // check();
+        check();
         //goToClass gtc=new goToClass(cname);
         getValues(cname);
         display();
@@ -79,8 +79,9 @@ public class TakeAttendence extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                            vibrator.vibrate(50);
+                            if(b==1) {
+                                vibrator.vibrate(50);
+                            }
 
                         count++;
                         pres=String.valueOf(count);
@@ -91,7 +92,7 @@ public class TakeAttendence extends AppCompatActivity {
                         if(droll<eroll) {
                             if (droll == sroll) {
                                 Log.i("first:","droll=sroll");
-                                mydb.alterTable(date,cname);
+                                        mydb.alterTable(date,cname,sroll,eroll);
                             }
                             mydb.registerData(date,cname, droll, 1,sroll,eroll);
                             droll++;
@@ -123,15 +124,16 @@ public class TakeAttendence extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                            vibrator.vibrate(50);
+                           if(b==1) {
+                               vibrator.vibrate(50);
+                           }
 
                         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
                         date = sdf.format(new Date());
                         date="dt"+date;
                         if(droll<eroll) {
                             if (droll == sroll) {
-                                mydb.alterTable(date,cname);
+                                mydb.alterTable(date,cname,sroll,eroll);
                             }
                             mydb.registerData(date,cname,droll,0,sroll,eroll);
                             droll++;
@@ -163,15 +165,19 @@ public class TakeAttendence extends AppCompatActivity {
                         SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
                         date = sdf.format(new Date());
                         date="dt"+date;
-                        Cursor res=mydb.retrievedatatodisplayattendance(date,cname);
-                        StringBuffer buffer = new StringBuffer();
-                        while (res.moveToNext()) {
+                        try {
+                            Cursor res = mydb.retrievedatatodisplayattendance(date, cname);
+                            StringBuffer buffer = new StringBuffer();
+                            while (res.moveToNext()) {
 
-                            buffer.append(res.getString(0)+"=");
-                            buffer.append(res.getString(2)+ "\t"+ res.getString(1)+"\n");
-                            //buffer.append("Ending Roll :" + res.getString(2) + "\n");
+                                buffer.append(res.getString(0) + "=");
+                                buffer.append(res.getString(2) + "\t" + res.getString(1) + "\n");
+                                //buffer.append("Ending Roll :" + res.getString(2) + "\n");
+                            }
+                            showmessage("Data", buffer.toString());
+                        }catch (Exception e){
+                            showmessage(":(","Attendance not taken");
                         }
-                        showmessage("Data", buffer.toString());
                     }
                 }
         );
@@ -187,9 +193,8 @@ public class TakeAttendence extends AppCompatActivity {
 
     }
     public void check(){
-    b=mydb.vibration1();
+        b=mydb.vibration1();
     }
-
 }
 
 

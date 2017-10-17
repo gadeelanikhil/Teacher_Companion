@@ -39,7 +39,7 @@ public class addclass extends AppCompatActivity {
 
     public void animateImg(){
         ImageView addclassimg=(ImageView)findViewById(R.id.addimg);
-        addclassimg.animate().rotation(360).setDuration(900);
+        addclassimg.animate().rotation(720).setDuration(2000);
     }
 
     public void confirmsbn() {

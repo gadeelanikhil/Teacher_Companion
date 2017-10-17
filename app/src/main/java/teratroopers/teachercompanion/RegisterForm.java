@@ -72,9 +72,7 @@ public class RegisterForm extends AppCompatActivity {
         tableView.setDataAdapter(new SimpleTableDataAdapter(this, classData));
 
         //comment the following code if there's any error
-        TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(this,result.getColumnCount(),200);
-        columnModel.setColumnWidth(1, 100);
-        columnModel.setColumnWidth(2, 200);
+        TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(this,result.getColumnCount(),100);
         tableView.setColumnModel(columnModel);
 
                 tableView.addDataClickListener(new TableDataClickListener() {

@@ -32,7 +32,7 @@ public class activity_statistics extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
-        linearLayout=(LinearLayout)findViewById(R.id.linearLayout);
+        linearLayout=(LinearLayout)findViewById(R.id.linearLayoutstat);
         this.mydb = new mydbhelper((Context)this);
         context=this;
         createCards();
@@ -93,7 +93,7 @@ public class activity_statistics extends AppCompatActivity implements View.OnCli
 
     }
     public void back(){
-        Button back =(Button)findViewById(R.id.back);
+        Button back =(Button)findViewById(R.id.backstat);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,21 +129,15 @@ public class activity_statistics extends AppCompatActivity implements View.OnCli
             a=a+Integer.parseInt(res.getString(1));
             buffer.append("\t\t"+res.getString(0) + "\t\t\t \t");
             buffer.append(y + "\t\t\t\t\t\t" + (y*100)/Integer.parseInt(g)+"%\n");
-
-
-
-            //buffer.append("Ending Roll :" + res.getString(2) + "\n");
         }
         buffer.append("\n");
        // buffer.append(x);
         buffer.append("\n");
        // buffer.append(a);
         buffer.append("\n");
-
         buffer.append("TOTAL NO OF CLASSES TAKEN :"+g+"\n");
         buffer.append("TOTAL CLASS PERCENTAGE IS:"+(a*100)/(x*Integer.parseInt(g))+"%");
         showmessage("CLASS STATISTICS", buffer.toString());
-
     }
 
     public void showmessage(String title,String Message) {
@@ -152,7 +146,5 @@ public class activity_statistics extends AppCompatActivity implements View.OnCli
         builder.setTitle(title);
         builder.setMessage(Message);
         builder.show();
-
     }
-
 }

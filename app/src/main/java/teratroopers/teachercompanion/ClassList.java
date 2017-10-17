@@ -69,6 +69,11 @@ public class ClassList extends AppCompatActivity implements View.OnClickListener
                                         public void onClick(DialogInterface dialog, int whichButton) {
                                             Toast.makeText(getApplicationContext(),str+" is deleted from the records",Toast.LENGTH_SHORT).show();
                                             mydb.deleteclass(str);
+                                            Intent intent = getIntent();
+                                            finish();
+                                            startActivity(intent);
+                                           // Bundle configBundle = new Bundle();
+                                           //onCreate(savedInstanceState);
                                         }})
                                     .setNegativeButton(android.R.string.no, null).show();
                             return true;

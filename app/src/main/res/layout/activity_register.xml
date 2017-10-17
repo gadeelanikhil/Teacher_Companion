@@ -31,10 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
         android:layout_marginStart="70dp"
-        android:text="Class List"
+        android:text="Register"
         android:textSize="20sp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <ScrollView
         android:id="@+id/scrollView2"
