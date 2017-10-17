@@ -245,28 +245,9 @@ public class mydbhelper extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("select * from "+ settings ,null);
         c.moveToNext();
         c.moveToNext();
+        c.moveToNext();
         a = c.getInt(0);
         return  a;
-    }
-    public void lock(int a){
-        if(a==3){
-            try {
-                SQLiteDatabase db = this.getWritableDatabase();
-                db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 3 where " + CL1 + "= 2");
-            }
-            catch (Exception e){
-
-            }
-        }
-        else{
-            try {
-                SQLiteDatabase db = this.getWritableDatabase();
-                db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 2 where " + CL1 + "= 3");
-            }
-            catch (Exception e){
-
-            }
-        }
     }
     public int bt(int a,boolean b){
         if(b){

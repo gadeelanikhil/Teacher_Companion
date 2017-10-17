@@ -55,18 +55,14 @@ public class settings extends AppCompatActivity {
         }, 1000);
     }
     public void vibration(){
-
         s1=(Switch)findViewById(R.id.switch1);
-
-            int b=mydb.vibration1();
+        int b=mydb.vibration1();
         if(b==1){
             s1.setChecked(true);
         }
         else{
             s1.setChecked(false);
         }
-
-
         s1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
@@ -75,12 +71,10 @@ public class settings extends AppCompatActivity {
                 if(isChecked){
                     s1.setChecked(true);
                     a=1;
-                    Log.i("message",String.valueOf(a));
                      mydb.vibration(a);
                 }
                 else{
                     s1.setChecked(false);
-                    //s1.setChecked();
                     a=0;
                     mydb.vibration(a);
                 }
@@ -94,11 +88,11 @@ public class settings extends AppCompatActivity {
         t.setVisibility(View.INVISIBLE);
         tv.setVisibility(View.INVISIBLE);
         int b=mydb.lock1();
-        if(b==3){
-            s2.setChecked(true);
+        if(b==5){
+            s2.setChecked(false);
         }
         else{
-            s2.setChecked(false);
+            s2.setChecked(true);
         }
 
         s2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -111,18 +105,12 @@ public class settings extends AppCompatActivity {
                     bt.setVisibility(View.VISIBLE);
                     t.setVisibility(View.VISIBLE);
                     tv.setVisibility(View.VISIBLE);
-                    a=3;
-                    Log.i("message",String.valueOf(a));
-                    mydb.lock(a);
                 }
                 else{
                     bt.setVisibility(View.VISIBLE);
                     s2.setChecked(false);
                     t.setVisibility(View.VISIBLE);
                     tv.setVisibility(View.VISIBLE);
-                    //s1.setChecked();
-                    a=2;
-                    mydb.lock(a);
                 }
             }
 
