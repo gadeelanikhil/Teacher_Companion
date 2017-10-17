@@ -133,17 +133,18 @@ public class settings extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                boolean b= s2.isChecked();
-                String s=t.getText().toString();
+                String s;
+                try {
+                   s = t.getText().toString();
+                }
+                catch (Exception e){
+                    s="";
+                    Toast.makeText(getApplicationContext(), "plss enter the pin",
+                            Toast.LENGTH_SHORT).show();
+                }
                 t.setVisibility(View.INVISIBLE);
                 tv.setVisibility(View.INVISIBLE);
                 bt.setVisibility(View.INVISIBLE);
-                if(b==true) {
-                    Log.i("btn", "true");
-                }
-                else
-                {
-                    Log.i("btn", "false");
-                }
                int a = mydb.bt(Integer.parseInt(s),b);
                 tv.setText("");
                 if(a==0){

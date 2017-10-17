@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
                                                        Intent addclassAct = new Intent("teratroopers.teachercompanion.addclass");
                                                        startActivity(addclassAct);
                                                    }
+                                                   else{
+                                                       Toast.makeText(getApplicationContext(), "add a class is locked",
+                                                               Toast.LENGTH_SHORT).show();
+                                                   }
                                                }
                                            }
             );
@@ -56,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
                     if(t==5) {
                         Intent classListAct = new Intent("teratroopers.teachercompanion.ClassList");
                         startActivity(classListAct);
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "ClassList is locked",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
             });
