@@ -145,6 +145,7 @@ public class settings extends AppCompatActivity {
                     Log.i("btn", "false");
                 }
                int a = mydb.bt(Integer.parseInt(s),b);
+                tv.setText("");
                 if(a==0){
                     s2.setChecked(true);
                     t.setVisibility(View.INVISIBLE);
