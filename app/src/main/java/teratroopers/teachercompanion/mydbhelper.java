@@ -1,11 +1,11 @@
 package teratroopers.teachercompanion;
-import android.content.ContentValues;
+
+import  android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +24,9 @@ public class mydbhelper extends SQLiteOpenHelper {
     public List<Integer> list = new ArrayList<>();
     public List<Integer> li = new ArrayList<>();
 
+    Cursor req;
     boolean k=false;
     int g,count;
-    Cursor req;
-
 
     public mydbhelper(Context context) {
         super(context,DATABSE_NAME, null, 1);
@@ -40,9 +39,13 @@ public class mydbhelper extends SQLiteOpenHelper {
         ContentValues contentvalues = new ContentValues();
         Log.i("info", sqLiteDatabase.toString());
         sqLiteDatabase.execSQL("create table " + cTABLE_NAME + "(" + CTCOL1 + " TEXT, " + CTCOL2 + " INTEGER);");
-        sqLiteDatabase.execSQL("create table " + settings + "(" + CL1 + " INTEGER );");
-        contentvalues.put(CL1, 0);
-        sqLiteDatabase.insert(settings, null, contentvalues);
+        sqLiteDatabase.execSQL("create table " + settings + "(" + CL1 + " INTEGER);");
+        sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(0)");
+        sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(2)");
+        sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(5)");
+        //contentvalues.put(CL1, 0);
+        //sqLiteDatabase.insert(settings, null, contentvalues);
+
     }
 
     @Override
@@ -234,6 +237,70 @@ public class mydbhelper extends SQLiteOpenHelper {
         c.moveToNext();
         a = c.getInt(0);
         return  a;
+    }
+
+    public int lock1(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int a;
+        Cursor c = db.rawQuery("select * from "+ settings ,null);
+        c.moveToNext();
+        c.moveToNext();
+        a = c.getInt(0);
+        return  a;
+    }
+    public void lock(int a){
+        if(a==3){
+            try {
+                SQLiteDatabase db = this.getWritableDatabase();
+                db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 3 where " + CL1 + "= 2");
+            }
+            catch (Exception e){
+
+            }
+        }
+        else{
+            try {
+                SQLiteDatabase db = this.getWritableDatabase();
+                db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 2 where " + CL1 + "= 3");
+            }
+            catch (Exception e){
+
+            }
+        }
+    }
+    public void bt(int a,boolean b){
+        if(b){
+          try {
+
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("UPDATE " + settings + " SET " + CL1 + "= "+a+" where " + CL1 + "= 5");
+              Log.i("if","true");
+          }
+          catch (Exception e){
+
+          }
+        }
+        else{
+            SQLiteDatabase db = this.getWritableDatabase();
+            int d;
+            Cursor c = db.rawQuery("select * from "+ settings ,null);
+            c.moveToNext();
+            c.moveToNext();
+            c.moveToNext();
+            d = c.getInt(0);
+            db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 5 where " + CL1 + "= "+d);
+            Log.i("if","false");
+        }
+    }
+    public int check1(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int d;
+        Cursor c = db.rawQuery("select * from "+ settings ,null);
+        c.moveToNext();
+        c.moveToNext();
+        c.moveToNext();
+        d = c.getInt(0);
+        return d;
     }
 }
 

@@ -24,7 +24,7 @@ public class TakeAttendence extends AppCompatActivity {
     Button absbutton;
     int total;
     int droll;
-    int a,b;
+    int a,b,t;
     String k,pres;
     String date;
     String cname;
@@ -44,6 +44,7 @@ public class TakeAttendence extends AppCompatActivity {
 
         vibrator=(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         check();
+
         //goToClass gtc=new goToClass(cname);
         getValues(cname);
         display();
@@ -195,6 +196,7 @@ public class TakeAttendence extends AppCompatActivity {
     public void check(){
         b=mydb.vibration1();
     }
+
 }
 
 

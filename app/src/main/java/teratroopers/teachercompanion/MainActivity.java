@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     Button btnaddclass,btnclasslist,btnregister,btnstatistics,btnsettings,btnmore;
+    mydbhelper mydb;
+    int t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,30 +25,41 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
 
+        mydb =new mydbhelper(this);
+
         btnaddclass=(Button)findViewById(R.id.addclass);
         btnregister=(Button)findViewById(R.id.register);
         btnclasslist=(Button)findViewById(R.id.classlist);
         btnstatistics=(Button)findViewById(R.id.statistics);
         btnsettings=(Button)findViewById(R.id.settings);
         btnmore=(Button)findViewById(R.id.more);
+        check1();
         activityListener();
     }
     public void activityListener(){
-        btnaddclass.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent addclassAct=new Intent("teratroopers.teachercompanion.addclass");
-                        startActivity(addclassAct);
+
+            btnaddclass.setOnClickListener(new View.OnClickListener() {
+                                               @Override
+                                               public void onClick(View view) {
+                                                   check1();
+                                                   if(t==5) {
+                                                       Intent addclassAct = new Intent("teratroopers.teachercompanion.addclass");
+                                                       startActivity(addclassAct);
+                                                   }
+                                               }
+                                           }
+            );
+            btnclasslist.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    check1();
+                    if(t==5) {
+                        Intent classListAct = new Intent("teratroopers.teachercompanion.ClassList");
+                        startActivity(classListAct);
                     }
                 }
-        );
-        btnclasslist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent classListAct=new Intent("teratroopers.teachercompanion.ClassList");
-                startActivity(classListAct);
-            }
-        });
+            });
+
         btnsettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(stats);
             }
         });
+    }
+    public void check1(){
+        t=mydb.check1();
     }
 
 }

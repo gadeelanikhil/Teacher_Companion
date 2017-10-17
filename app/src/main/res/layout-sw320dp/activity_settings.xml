@@ -10,7 +10,7 @@
         android:id="@+id/toolbar4"
         android:layout_width="400dp"
         android:layout_height="220dp"
-        android:layout_marginBottom="357dp"
+        android:layout_marginBottom="347dp"
         android:background="?android:attr/colorAccent"
         android:elevation="0dp"
         android:minHeight="?attr/actionBarSize"
@@ -18,7 +18,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_constraintBottom_creator="1"
-        tools:layout_editor_absoluteX="-3dp" />
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -75,5 +76,43 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.637" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberPassword"
+        android:visibility="visible"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.782" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="67dp"
+        android:layout_marginStart="67dp"
+        android:text="PIN(4 digits)"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.778" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lock/unlock"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.493" />
 
 </android.support.constraint.ConstraintLayout>
