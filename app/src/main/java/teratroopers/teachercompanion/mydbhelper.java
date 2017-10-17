@@ -42,9 +42,6 @@ public class mydbhelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table " + settings + "(" + CL1 + " INTEGER);");
         sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(0)");
         sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(5)");
-        //contentvalues.put(CL1, 0);
-        //sqLiteDatabase.insert(settings, null, contentvalues);
-
     }
 
     @Override
