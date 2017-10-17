@@ -137,7 +137,20 @@ public class settings extends AppCompatActivity {
                 t.setVisibility(View.INVISIBLE);
                 tv.setVisibility(View.INVISIBLE);
                 bt.setVisibility(View.INVISIBLE);
-                mydb.bt(Integer.parseInt(s),b);
+                if(b==true) {
+                    Log.i("btn", "true");
+                }
+                else
+                {
+                    Log.i("btn", "false");
+                }
+               int a = mydb.bt(Integer.parseInt(s),b);
+                if(a==0){
+                    s2.setChecked(true);
+                    t.setVisibility(View.INVISIBLE);
+                    tv.setVisibility(View.INVISIBLE);
+                    bt.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }

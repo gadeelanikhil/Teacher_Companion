@@ -268,16 +268,17 @@ public class mydbhelper extends SQLiteOpenHelper {
             }
         }
     }
-    public void bt(int a,boolean b){
+    public int bt(int a,boolean b){
         if(b){
           try {
 
             SQLiteDatabase db = this.getWritableDatabase();
             db.execSQL("UPDATE " + settings + " SET " + CL1 + "= "+a+" where " + CL1 + "= 5");
               Log.i("if","true");
+              return 1;
           }
           catch (Exception e){
-
+             return 0;
           }
         }
         else{
@@ -288,8 +289,14 @@ public class mydbhelper extends SQLiteOpenHelper {
             c.moveToNext();
             c.moveToNext();
             d = c.getInt(0);
-            db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 5 where " + CL1 + "= "+d);
-            Log.i("if","false");
+            if(d==a) {
+                db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 5 where " + CL1 + "= " + d);
+                return 1;
+            }
+            else{
+                return 0;
+            }
+
         }
     }
     public int check1(){
