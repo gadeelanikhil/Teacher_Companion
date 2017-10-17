@@ -24,7 +24,7 @@ public class TakeAttendence extends AppCompatActivity {
     Button absbutton;
     int total;
     int droll;
-    int a,b,t;
+    int a,b;
     String k,pres;
     String date;
     String cname;

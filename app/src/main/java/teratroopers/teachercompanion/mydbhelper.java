@@ -237,16 +237,6 @@ public class mydbhelper extends SQLiteOpenHelper {
         a = c.getInt(0);
         return  a;
     }
-
-    public int lock1(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        int a;
-        Cursor c = db.rawQuery("select * from "+ settings ,null);
-        c.moveToNext();
-        c.moveToNext();
-        a = c.getInt(0);
-        return  a;
-    }
     public int bt(int a,boolean b){
         if(b){
           try {
@@ -262,11 +252,7 @@ public class mydbhelper extends SQLiteOpenHelper {
         }
         else{
             SQLiteDatabase db = this.getWritableDatabase();
-            int d;
-            Cursor c = db.rawQuery("select * from "+ settings ,null);
-            c.moveToNext();
-            c.moveToNext();
-            d = c.getInt(0);
+            int d=check1();
             if(d==a) {
                 db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 5 where " + CL1 + "= " + d);
                 return 1;
