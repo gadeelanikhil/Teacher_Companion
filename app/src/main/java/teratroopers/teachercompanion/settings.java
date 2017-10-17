@@ -88,7 +88,7 @@ public class settings extends AppCompatActivity {
         bt.setVisibility(View.INVISIBLE);
         t.setVisibility(View.INVISIBLE);
         tv.setVisibility(View.INVISIBLE);
-        int b=mydb.lock1();
+        int b=mydb.check1();
         if(b==5){
             s2.setChecked(false);
         }
@@ -103,16 +103,13 @@ public class settings extends AppCompatActivity {
                 Log.v("Switch State=", ""+isChecked);
                 if(isChecked){
                     s2.setChecked(true);
-                    bt.setVisibility(View.VISIBLE);
-                    t.setVisibility(View.VISIBLE);
-                    tv.setVisibility(View.VISIBLE);
                 }
                 else{
-                    bt.setVisibility(View.VISIBLE);
                     s2.setChecked(false);
-                    t.setVisibility(View.VISIBLE);
-                    tv.setVisibility(View.VISIBLE);
                 }
+                bt.setVisibility(View.VISIBLE);
+                t.setVisibility(View.VISIBLE);
+                tv.setVisibility(View.VISIBLE);
             }
 
         });
@@ -122,27 +119,39 @@ public class settings extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
                boolean b= s2.isChecked();
+                int z=0;
                 String s;
                 try {
-                   s = t.getText().toString();
+                    s = t.getText().toString();
                     t.setText("");
-                }
-                catch (Exception e){
-                    s="";
-                    Toast.makeText(getApplicationContext(), "plss enter the pin",
-                            Toast.LENGTH_SHORT).show();
-                }
-                t.setVisibility(View.INVISIBLE);
-                tv.setVisibility(View.INVISIBLE);
-                bt.setVisibility(View.INVISIBLE);
-               int a = mydb.bt(Integer.parseInt(s),b);
-                if(a==0){
-                    s2.setChecked(true);
+
                     t.setVisibility(View.INVISIBLE);
                     tv.setVisibility(View.INVISIBLE);
                     bt.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getApplicationContext(), "plss enter the valid pin",
+                    int a = mydb.bt(Integer.parseInt(s), b);
+                    if (a == 0) {
+                        s2.setChecked(true);
+                        t.setVisibility(View.INVISIBLE);
+                        tv.setVisibility(View.INVISIBLE);
+                        bt.setVisibility(View.INVISIBLE);
+                        Toast.makeText(getApplicationContext(), "plss enter the valid pin",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "plss enter the pin",
                             Toast.LENGTH_SHORT).show();
+                    z=1;
+                    if(b) {
+                        s2.setChecked(false);
+                    }else{
+                        s2.setChecked(true);
+                    }
+                }
+                if(z==1){
+                    t.setVisibility(View.INVISIBLE);
+                    tv.setVisibility(View.INVISIBLE);
+                    bt.setVisibility(View.INVISIBLE);
                 }
             }
         });

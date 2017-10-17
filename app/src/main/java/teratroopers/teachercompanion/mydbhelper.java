@@ -41,7 +41,6 @@ public class mydbhelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table " + cTABLE_NAME + "(" + CTCOL1 + " TEXT, " + CTCOL2 + " INTEGER);");
         sqLiteDatabase.execSQL("create table " + settings + "(" + CL1 + " INTEGER);");
         sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(0)");
-        sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(2)");
         sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(5)");
         //contentvalues.put(CL1, 0);
         //sqLiteDatabase.insert(settings, null, contentvalues);
@@ -245,7 +244,6 @@ public class mydbhelper extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("select * from "+ settings ,null);
         c.moveToNext();
         c.moveToNext();
-        c.moveToNext();
         a = c.getInt(0);
         return  a;
     }
@@ -268,7 +266,6 @@ public class mydbhelper extends SQLiteOpenHelper {
             Cursor c = db.rawQuery("select * from "+ settings ,null);
             c.moveToNext();
             c.moveToNext();
-            c.moveToNext();
             d = c.getInt(0);
             if(d==a) {
                 db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 5 where " + CL1 + "= " + d);
@@ -284,7 +281,6 @@ public class mydbhelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         int d;
         Cursor c = db.rawQuery("select * from "+ settings ,null);
-        c.moveToNext();
         c.moveToNext();
         c.moveToNext();
         d = c.getInt(0);
