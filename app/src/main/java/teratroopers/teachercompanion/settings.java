@@ -150,6 +150,8 @@ public class settings extends AppCompatActivity {
                     t.setVisibility(View.INVISIBLE);
                     tv.setVisibility(View.INVISIBLE);
                     bt.setVisibility(View.INVISIBLE);
+                    Toast.makeText(getApplicationContext(), "plss enter the valid pin",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
