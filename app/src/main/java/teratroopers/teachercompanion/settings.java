@@ -36,6 +36,7 @@ public class settings extends AppCompatActivity {
         vibration();
         lock();
         button();
+        back();
     }
     public void animateImage(){
         sett=(ImageView)findViewById(R.id.imageView4);
@@ -124,6 +125,7 @@ public class settings extends AppCompatActivity {
                 String s;
                 try {
                    s = t.getText().toString();
+                    t.setText("");
                 }
                 catch (Exception e){
                     s="";
@@ -134,7 +136,6 @@ public class settings extends AppCompatActivity {
                 tv.setVisibility(View.INVISIBLE);
                 bt.setVisibility(View.INVISIBLE);
                int a = mydb.bt(Integer.parseInt(s),b);
-                tv.setText("");
                 if(a==0){
                     s2.setChecked(true);
                     t.setVisibility(View.INVISIBLE);
@@ -143,6 +144,15 @@ public class settings extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "plss enter the valid pin",
                             Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+    public void back(){
+        Button back =(Button)findViewById(R.id.back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
