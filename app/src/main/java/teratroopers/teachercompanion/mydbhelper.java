@@ -26,7 +26,7 @@ public class mydbhelper extends SQLiteOpenHelper {
 
     Cursor req;
     boolean k=false;
-    int g,count;
+    int g,count,n=0;
 
     public mydbhelper(Context context) {
         super(context,DATABSE_NAME, null, 1);
@@ -185,19 +185,25 @@ public class mydbhelper extends SQLiteOpenHelper {
     }
     public Cursor retrievedata(String cname){
          SQLiteDatabase db = this.getWritableDatabase();
-            req = db.rawQuery("Select * from " + cname, null);
+        req = db.rawQuery("PRAGMA table_info("+cname+")",null);
+        req.moveToLast();
+        String s=req.getString(1);
+        req.close();
+        if(s.equals(COL3)) {
+            req=db.rawQuery("Select " + COL1 + "," + COL2 + "," + COL3 + " from " + cname, null);
+        }
+        else{
+            req = db.rawQuery("Select " + COL1 + "," + COL2 + "," + COL3 + "," + s + " from " + cname, null);
+        }
         return req;
     }
     public Cursor statistics(String cname){
         SQLiteDatabase db = this.getWritableDatabase();
-       // req = db.rawQuery("Select * from "+cname,null);
         req =db.rawQuery("Select "+COL1+"," + COL3 + " from " + cname,null);
         return req;
     }
     public Cursor statistics1(String cname){
         SQLiteDatabase db = this.getWritableDatabase();
-        // req = db.rawQuery("Select * from "+cname,null);
-        //req =db.rawQuery("Select "+COL1+"," + COL3 + ", from " + cname,null);
         Cursor result = db.rawQuery("Select " +CTCOL2 + " from " + cTABLE_NAME + " where " + CTCOL1 + "=" + "'"+cname+"'", null);
         return result;
     }
