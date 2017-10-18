@@ -149,9 +149,9 @@ public class mydbhelper extends SQLiteOpenHelper {
 
     public Cursor retrievedatatodisplayattendance(String date,String classname){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
-        try (Cursor result = sqLiteDatabase.rawQuery("Select " + COL1 + "," + COL3 + "," + date + " from " + classname, null)) {
+         Cursor result = sqLiteDatabase.rawQuery("Select " + COL1 + "," + COL3 + "," + date + " from " + classname, null) ;
             return result;
-        }
+
     }
 
     public void registerData(String date,String cname,int droll,int i,int sroll,int eroll){
