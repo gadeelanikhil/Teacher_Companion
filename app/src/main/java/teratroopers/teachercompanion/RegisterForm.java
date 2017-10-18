@@ -49,8 +49,8 @@ public class RegisterForm extends AppCompatActivity {
             p++;
         }
 
-       classData=new String[result.getCount()][result.getColumnNames().length];
-       result.moveToFirst();
+        classData=new String[result.getCount()][result.getColumnNames().length];
+        result.moveToFirst();
         for(int i=0;i<result.getCount();i++){
             for(int j=0;j<result.getColumnNames().length;j++){
                 try{
@@ -75,13 +75,13 @@ public class RegisterForm extends AppCompatActivity {
         TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(this,result.getColumnCount(),100);
         tableView.setColumnModel(columnModel);
 
-                tableView.addDataClickListener(new TableDataClickListener() {
-                    @Override
-                    public void onDataClicked(int rowIndex, Object clickedData) {
-                        Toast.makeText(getApplicationContext(), ((String[]) clickedData)[1], Toast.LENGTH_SHORT).show();
-                    }
-                });
+        tableView.addDataClickListener(new TableDataClickListener() {
+            @Override
+            public void onDataClicked(int rowIndex, Object clickedData) {
+                Toast.makeText(getApplicationContext(), ((String[]) clickedData)[1], Toast.LENGTH_SHORT).show();
             }
+        });
     }
+}
 
 

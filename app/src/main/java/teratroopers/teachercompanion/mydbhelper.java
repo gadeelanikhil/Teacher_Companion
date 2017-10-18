@@ -10,19 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class mydbhelper extends SQLiteOpenHelper {
-    public static final String DATABSE_NAME="student.sqLiteDatabase";
-    public static  String TABLE_NAME;
-    public static final String cTABLE_NAME="cTABLE";
-    public static final String settings="Settings";
-    public static final String COL1="rollnos";
-    public static final String COL2="studnames";
-    public static final String COL3="count";
-    public static final String CTCOL1="classname";
-    public static final String CL1="key";
-    public static final String CL2="values";
-    public static final String CTCOL2="total";
-    public List<Integer> list = new ArrayList<>();
-    public List<Integer> li = new ArrayList<>();
+    private static final String DATABSE_NAME="student.sqLiteDatabase";
+    private static  String TABLE_NAME;
+    private static final String cTABLE_NAME="cTABLE";
+    private static final String settings="Settings";
+    private static final String COL1="rollnos";
+    private static final String COL2="studnames";
+    private static final String COL3="count";
+    private static final String CTCOL1="classname";
+    private static final String CL1="key";
+    //private static final String CL2="values";
+    private static final String CTCOL2="total";
+    private List<Integer> list = new ArrayList<>();
+    private List<Integer> li = new ArrayList<>();
 
     Cursor req;
     boolean k=false;
@@ -108,10 +108,7 @@ public class mydbhelper extends SQLiteOpenHelper {
         result.moveToNext();
         int k=Integer.parseInt(result.getString(0));
         Log.i("value of k:",String.valueOf(k));
-        if(k==0)
-            return true;
-        else
-            return false;
+        return k == 0 ? true : false;
     }
 
     public void deleteclass(String classname){
@@ -142,6 +139,7 @@ public class mydbhelper extends SQLiteOpenHelper {
             }
             catch (Exception e){
                 Log.i("Attendance taken:","finish");
+                e.printStackTrace();
             }
         }
         else {
@@ -151,8 +149,9 @@ public class mydbhelper extends SQLiteOpenHelper {
 
     public Cursor retrievedatatodisplayattendance(String date,String classname){
         SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
-        Cursor result = sqLiteDatabase.rawQuery("Select "+COL1+"," + COL3+","+ date +" from " + classname,null);
-        return result;
+        try (Cursor result = sqLiteDatabase.rawQuery("Select " + COL1 + "," + COL3 + "," + date + " from " + classname, null)) {
+            return result;
+        }
     }
 
     public void registerData(String date,String cname,int droll,int i,int sroll,int eroll){
@@ -180,17 +179,13 @@ public class mydbhelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("PRAGMA table_info("+tableName+")",null);
         int i= res.getColumnIndex(fieldName);
+        res.close();
 
-        if(i == -1)
-        {
-            Log.i("Row not exist","yes");
-            return true;
-        }
-        else return false;
+        return i == -1 ? true : false;
     }
     public Cursor retrievedata(String cname){
-        SQLiteDatabase db = this.getWritableDatabase();
-         req = db.rawQuery("Select * from "+cname,null);
+         SQLiteDatabase db = this.getWritableDatabase();
+            req = db.rawQuery("Select * from " + cname, null);
         return req;
     }
     public Cursor statistics(String cname){
@@ -213,7 +208,7 @@ public class mydbhelper extends SQLiteOpenHelper {
                 db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 1 where " + CL1 + "= 0");
             }
             catch (Exception e){
-
+              e.printStackTrace();
             }
         }
         else{
@@ -222,7 +217,7 @@ public class mydbhelper extends SQLiteOpenHelper {
                 db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 0 where " + CL1 + "= 1");
             }
             catch (Exception e){
-
+                e.printStackTrace();
             }
         }
     }
@@ -232,6 +227,7 @@ public class mydbhelper extends SQLiteOpenHelper {
         Cursor c = db.rawQuery("select * from "+ settings ,null);
         c.moveToNext();
         a = c.getInt(0);
+        c.close();
         return  a;
     }
     public int bt(int a,boolean b){
@@ -267,6 +263,7 @@ public class mydbhelper extends SQLiteOpenHelper {
         c.moveToNext();
         c.moveToNext();
         d = c.getInt(0);
+        c.close();
         return d;
     }
 }

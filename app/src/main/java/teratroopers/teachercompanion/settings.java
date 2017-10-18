@@ -102,7 +102,14 @@ public class settings extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.v("Switch State=", ""+isChecked);
                 if(isChecked){
-                    s2.setChecked(true);
+                  int a =  mydb.check1();
+                    if(a==5) {
+                        s2.setChecked(true);
+                    }else{
+                        s2.setChecked(false);
+                        //Toast.makeText(getApplicationContext(), "already it is in locked mode pls unlock",
+                                //Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else{
                     s2.setChecked(false);
@@ -131,9 +138,9 @@ public class settings extends AppCompatActivity {
                     int a = mydb.bt(Integer.parseInt(s), b);
                     if (a == 0) {
                         s2.setChecked(true);
-                        t.setVisibility(View.INVISIBLE);
-                        tv.setVisibility(View.INVISIBLE);
-                        bt.setVisibility(View.INVISIBLE);
+                        t.setVisibility(View.VISIBLE);
+                        tv.setVisibility(View.VISIBLE);
+                        bt.setVisibility(View.VISIBLE);
                         Toast.makeText(getApplicationContext(), "plss enter the valid pin",
                                 Toast.LENGTH_SHORT).show();
                     }
