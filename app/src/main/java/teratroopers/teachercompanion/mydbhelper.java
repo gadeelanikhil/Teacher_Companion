@@ -23,10 +23,12 @@ public class mydbhelper extends SQLiteOpenHelper {
     private static final String CTCOL2="total";
     private List<Integer> list = new ArrayList<>();
     private List<Integer> li = new ArrayList<>();
+    private List<String> lis = new ArrayList<>();
 
     Cursor req;
     boolean k=false;
-    int g,count,n=0;
+    int g,count,n=0,i;
+    String s;
 
     public mydbhelper(Context context) {
         super(context,DATABSE_NAME, null, 1);
@@ -187,13 +189,37 @@ public class mydbhelper extends SQLiteOpenHelper {
          SQLiteDatabase db = this.getWritableDatabase();
         req = db.rawQuery("PRAGMA table_info("+cname+")",null);
         req.moveToLast();
-        String s=req.getString(1);
-        req.close();
-        if(s.equals(COL3)) {
-            req=db.rawQuery("Select " + COL1 + "," + COL2 + "," + COL3 + " from " + cname, null);
+        int a=req.getInt(0);
+        Log.i("msg",Integer.toString(a));
+        if(a>4){
+            for(int i=0;i<3;i++) {
+                lis.add(req.getString(1));
+                req.moveToPrevious();
+            }
+            req.close();
+            i=0;
+            req = db.rawQuery("Select " + COL1  + "," + COL3 + "," + lis.get(i+2)+ "," + lis.get(i+1) + "," +lis.get(i)+ " from " + cname, null);
         }
         else{
-            req = db.rawQuery("Select " + COL1 + "," + COL2 + "," + COL3 + "," + s + " from " + cname, null);
+            i=0;
+            a=a-2;
+            if(a==2){
+                for(int i=0;i<2;i++) {
+                    lis.add(req.getString(1));
+                    req.moveToPrevious();
+                }
+                req.close();
+                req = db.rawQuery("Select " + COL1  + "," + COL3 + "," + lis.get(i+1)+ "," +lis.get(i) + " from " + cname, null);
+            }
+            else if(a==1){
+                lis.add(req.getString(1));
+                req.close();
+                req = db.rawQuery("Select " + COL1  + "," + COL3 + "," + lis.get(i) + " from " + cname, null);
+            }
+            else{
+                req.close();
+                req=db.rawQuery("Select " + COL1 +  "," + COL3 + " from " + cname, null);
+            }
         }
         return req;
     }
