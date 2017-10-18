@@ -65,6 +65,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         String str=v.getTag().toString();
         Intent intent=new Intent("teratroopers.teachercompanion.RegisterForm");
         intent.putExtra("name",str);
+        intent.putExtra("value","register");
         startActivity(intent);
     }
 }

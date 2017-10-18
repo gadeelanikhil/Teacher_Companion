@@ -1,5 +1,6 @@
 
 package teratroopers.teachercompanion;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,7 +21,9 @@ import java.util.ArrayList;
 public class RegisterForm extends AppCompatActivity {
 
     mydbhelper mydb;
-    String cname;
+    String cname,value;
+    Button b;
+    Cursor result;
 
     static String[] classColNames;
     static String[][] classData;
@@ -28,9 +33,16 @@ public class RegisterForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_form);
         mydb = new mydbhelper(this);
+        button();
         Bundle b = getIntent().getExtras();
-        cname = b.getString("name");
-        Cursor result = mydb.retrievedata(cname);
+         cname = b.getString("name");
+         value = b.getString("value");
+        if(value.equals("register")){
+            result = mydb.retrievedata(cname);
+        }
+        else{
+            result=mydb.retrievedatatodisplayattendance(value,cname);
+        }
         classColNames = result.getColumnNames();
         int p=0;
         for (String k:classColNames) {
@@ -79,6 +91,22 @@ public class RegisterForm extends AppCompatActivity {
             @Override
             public void onDataClicked(int rowIndex, Object clickedData) {
                 Toast.makeText(getApplicationContext(), ((String[]) clickedData)[1], Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void button(){
+
+       b=(Button)findViewById(R.id.button8);
+        b.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view){
+                Intent intent=new Intent("teratroopers.teachercompanion.settings");
+                Bundle b = new Bundle();
+                b.putString("cname",cname);
+                intent.putExtras(b);
+                //intent.putExtra("name",cname);
+                //startActivity(intent);
+                startActivity(intent);
+                //finish();
             }
         });
     }

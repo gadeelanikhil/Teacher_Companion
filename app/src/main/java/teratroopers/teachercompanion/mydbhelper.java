@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class mydbhelper extends SQLiteOpenHelper {
+
     private static final String DATABSE_NAME="student.sqLiteDatabase";
     private static  String TABLE_NAME;
     private static final String cTABLE_NAME="cTABLE";
@@ -19,7 +20,6 @@ public class mydbhelper extends SQLiteOpenHelper {
     private static final String COL3="count";
     private static final String CTCOL1="classname";
     private static final String CL1="key";
-    //private static final String CL2="values";
     private static final String CTCOL2="total";
     private List<Integer> list = new ArrayList<>();
     private List<Integer> li = new ArrayList<>();
@@ -27,12 +27,14 @@ public class mydbhelper extends SQLiteOpenHelper {
 
     Cursor req;
     boolean k=false;
-    int g,count,n=0,i;
-    String s;
+    int g,count,i;
+
 
     public mydbhelper(Context context) {
+
         super(context,DATABSE_NAME, null, 1);
     }
+
     public SQLiteDatabase sqLiteDatabase;
 
     @Override
