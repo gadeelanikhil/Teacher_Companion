@@ -293,7 +293,7 @@ public class mydbhelper extends SQLiteOpenHelper {
     public int check1(){
         SQLiteDatabase db = this.getWritableDatabase();
         int d;
-        Cursor c = db.rawQuery("select * from "+ settings ,null);
+         Cursor c = db.rawQuery("select * from "+ settings ,null);
         c.moveToNext();
         c.moveToNext();
         d = c.getInt(0);

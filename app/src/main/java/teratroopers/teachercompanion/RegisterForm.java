@@ -10,6 +10,7 @@ import de.codecrafters.tableview.listeners.TableDataClickListener;
 import de.codecrafters.tableview.model.TableColumnDpWidthModel;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
+import de.codecrafters.tableview.toolkit.TableDataRowBackgroundProviders;
 
 import android.util.Log;
 import android.view.View;
@@ -92,8 +93,14 @@ public class RegisterForm extends AppCompatActivity {
             tableView.setColumnCount(result.getColumnCount());
             tableView.setDataAdapter(new SimpleTableDataAdapter(this, classData));
 
+            int colorEvenRows = getResources().getColor(R.color.white);
+            int colorOddRows = getResources().getColor(R.color.gray);
+            tableView.setDataRowBackgroundProvider(TableDataRowBackgroundProviders.alternatingRowColors(colorEvenRows, colorOddRows));
+
             //comment the following code if there's any error
-            TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(this, result.getColumnCount(), 100);
+            TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(this, result.getColumnCount(), 150);
+            columnModel.setColumnWidth(0,100);
+            columnModel.setColumnWidth(1,100);
             tableView.setColumnModel(columnModel);
 
             tableView.addDataClickListener(new TableDataClickListener() {
