@@ -88,7 +88,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".datepicker"></activity>
+        <activity android:name=".datepicker">
+            <intent-filter>
+                <action android:name="teratroopers.teachercompanion.datepicker" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

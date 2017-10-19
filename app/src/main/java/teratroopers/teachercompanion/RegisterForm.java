@@ -23,6 +23,7 @@ public class RegisterForm extends AppCompatActivity {
     mydbhelper mydb;
     String cname,value;
     Button b;
+    int a;
     Cursor result;
 
     static String[] classColNames;
@@ -39,60 +40,69 @@ public class RegisterForm extends AppCompatActivity {
         button();
         if(value.equals("register")){
             result = mydb.retrievedata(cname);
+            a=0;
         }
         else{
-            result=mydb.retrievedatatodisplayattendance(value,cname);
-        }
-        classColNames = result.getColumnNames();
-        int p=0;
-        for (String k:classColNames) {
-            StringBuilder str = new StringBuilder(k);
-            k=k.replace("dt","");
-            classColNames[p]=k;
-            if(k.startsWith("1") || k.startsWith("2") || k.startsWith("3") || k.startsWith("4")|| k.startsWith("5")
-                    || k.startsWith("6")|| k.startsWith("7")|| k.startsWith("8")|| k.startsWith("9")|| k.startsWith("0")){
-
-                str.insert(2,':');
-                str.insert(5,'/');
-                str.insert(8,'/');
-                k=str.toString();
-                classColNames[p]=k;
+            try {
+                result = mydb.retrievedatatodisplayattendance(value, cname);
+                a=0;
+            }catch(Exception e){
+                Toast.makeText(getApplicationContext(), "required date attendance is not taken",
+                        Toast.LENGTH_SHORT).show();
+                a=1;
             }
-            p++;
         }
+        if(a==0) {
+            classColNames = result.getColumnNames();
+            int p = 0;
+            for (String k : classColNames) {
+                StringBuilder str = new StringBuilder(k);
+                k = k.replace("dt", "");
+                classColNames[p] = k;
+                if (k.startsWith("1") || k.startsWith("2") || k.startsWith("3") || k.startsWith("4") || k.startsWith("5")
+                        || k.startsWith("6") || k.startsWith("7") || k.startsWith("8") || k.startsWith("9") || k.startsWith("0")) {
 
-        classData=new String[result.getCount()][result.getColumnNames().length];
-        result.moveToFirst();
-        for(int i=0;i<result.getCount();i++){
-            for(int j=0;j<result.getColumnNames().length;j++){
-                try{
-                    classData[i][j]=result.getString(j);
+                    str.insert(2, ':');
+                    str.insert(5, '/');
+                    str.insert(8, '/');
+                    k = str.toString();
+                    classColNames[p] = k;
                 }
-                catch(NullPointerException npe){
-                    classData[i][j]="";
+                p++;
+            }
+
+            classData = new String[result.getCount()][result.getColumnNames().length];
+            result.moveToFirst();
+            for (int i = 0; i < result.getCount(); i++) {
+                for (int j = 0; j < result.getColumnNames().length; j++) {
+                    try {
+                        classData[i][j] = result.getString(j);
+                    } catch (NullPointerException npe) {
+                        classData[i][j] = "";
+                    }
                 }
+                result.moveToNext();
             }
-            result.moveToNext();
+
+
+            final TableView<String[]> tableView = (TableView<String[]>) findViewById(R.id.tableView);
+
+            tableView.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
+            tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(this, classColNames));
+            tableView.setColumnCount(result.getColumnCount());
+            tableView.setDataAdapter(new SimpleTableDataAdapter(this, classData));
+
+            //comment the following code if there's any error
+            TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(this, result.getColumnCount(), 100);
+            tableView.setColumnModel(columnModel);
+
+            tableView.addDataClickListener(new TableDataClickListener() {
+                @Override
+                public void onDataClicked(int rowIndex, Object clickedData) {
+                    Toast.makeText(getApplicationContext(), ((String[]) clickedData)[1], Toast.LENGTH_SHORT).show();
+                }
+            });
         }
-
-
-        final TableView<String[]> tableView = (TableView<String[]>) findViewById(R.id.tableView);
-
-        tableView.setHeaderBackgroundColor(Color.parseColor("#2ecc71"));
-        tableView.setHeaderAdapter(new SimpleTableHeaderAdapter(this, classColNames));
-        tableView.setColumnCount(result.getColumnCount());
-        tableView.setDataAdapter(new SimpleTableDataAdapter(this, classData));
-
-        //comment the following code if there's any error
-        TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(this,result.getColumnCount(),100);
-        tableView.setColumnModel(columnModel);
-
-        tableView.addDataClickListener(new TableDataClickListener() {
-            @Override
-            public void onDataClicked(int rowIndex, Object clickedData) {
-                Toast.makeText(getApplicationContext(), ((String[]) clickedData)[1], Toast.LENGTH_SHORT).show();
-            }
-        });
     }
     public void button(){
 
