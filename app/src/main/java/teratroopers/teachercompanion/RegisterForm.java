@@ -99,7 +99,7 @@ public class RegisterForm extends AppCompatActivity {
        b=(Button)findViewById(R.id.button8);
         b.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                Intent intent=new Intent("teratroopers.teachercompanion.settings");
+                Intent intent=new Intent("teratroopers.teachercompanion.datepicker");
                 Bundle b = new Bundle();
                 b.putString("cname",cname);
                 intent.putExtras(b);
