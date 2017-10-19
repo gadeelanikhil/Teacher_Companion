@@ -33,10 +33,10 @@ public class RegisterForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_form);
         mydb = new mydbhelper(this);
+        Bundle bd = getIntent().getExtras();
+         cname = bd.getString("name");
+         value = bd.getString("value");
         button();
-        Bundle b = getIntent().getExtras();
-         cname = b.getString("name");
-         value = b.getString("value");
         if(value.equals("register")){
             result = mydb.retrievedata(cname);
         }
@@ -97,18 +97,25 @@ public class RegisterForm extends AppCompatActivity {
     public void button(){
 
        b=(Button)findViewById(R.id.button8);
-        b.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view){
-                Intent intent=new Intent("teratroopers.teachercompanion.datepicker");
-                Bundle b = new Bundle();
-                b.putString("cname",cname);
-                intent.putExtras(b);
-                //intent.putExtra("name",cname);
-                //startActivity(intent);
-                startActivity(intent);
-                //finish();
-            }
-        });
+        if(value.equals("register"))
+        {
+            b.setVisibility(View.VISIBLE);
+            b.setOnClickListener(new View.OnClickListener(){
+                public void onClick(View view){
+                    Intent intent=new Intent("teratroopers.teachercompanion.datepicker");
+                    Bundle b = new Bundle();
+                    b.putString("cname",cname);
+                    intent.putExtras(b);
+                    //intent.putExtra("name",cname);
+                    //startActivity(intent);
+                    startActivity(intent);
+                    //finish();
+                }
+            });
+        }
+        else{
+            b.setVisibility(View.INVISIBLE);
+        }
     }
 }
 
