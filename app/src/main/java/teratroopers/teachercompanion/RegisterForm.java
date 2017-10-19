@@ -98,7 +98,7 @@ public class RegisterForm extends AppCompatActivity {
             tableView.setDataRowBackgroundProvider(TableDataRowBackgroundProviders.alternatingRowColors(colorEvenRows, colorOddRows));
 
             //comment the following code if there's any error
-            TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(this, result.getColumnCount(), 150);
+            TableColumnDpWidthModel columnModel = new TableColumnDpWidthModel(this, result.getColumnCount(), 120);
             columnModel.setColumnWidth(0,100);
             columnModel.setColumnWidth(1,100);
             tableView.setColumnModel(columnModel);
