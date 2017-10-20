@@ -224,10 +224,15 @@ public class settings extends AppCompatActivity {
                                           tv.setVisibility(View.INVISIBLE);
                                           bt.setVisibility(View.INVISIBLE);
                                           t.setText("");
+                                          tv.setText("PIN(4 digits)");
+                                          bt.setText("LOCK/UNLOCK");
                                           t.setVisibility(View.INVISIBLE);
                                           Toast.makeText(getApplicationContext(),"your password is:"+q,
                                                   Toast.LENGTH_LONG).show();
-                                          s2.setChecked(true);
+                                          Intent intent = getIntent();
+                                          finish();
+                                          startActivity(intent);
+                                          //s2.setChecked(true);
                                       }
                                       else{
                                           Toast.makeText(getApplicationContext(), "entered wrong OTP",
