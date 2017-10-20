@@ -46,6 +46,7 @@ public class mydbhelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("create table " + settings + "(" + CL1 + " INTEGER);");
         sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(0)");
         sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(5)");
+        sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(7)");
     }
 
     @Override
@@ -299,6 +300,34 @@ public class mydbhelper extends SQLiteOpenHelper {
         d = c.getInt(0);
         c.close();
         return d;
+    }
+    public void password(int a){
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL("UPDATE " + settings + " SET " + CL1 + "= "+ a +" where " + CL1 + "= 7");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public int password1(String a) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int d;
+        Cursor c = db.rawQuery("select * from " + settings, null);
+        c.moveToNext();
+        c.moveToNext();
+        c.moveToNext();
+        d = c.getInt(0);
+        int b=Integer.parseInt(a);
+        if(b==d){
+            d=1;
+        }
+        else{
+            d=0;
+        }
+        c.close();
+        return d;
+
     }
 }
 

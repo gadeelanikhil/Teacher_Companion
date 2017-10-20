@@ -10,17 +10,24 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.*;
+import android.telephony.*;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.Context;
+import java.util.Random;
 
 public class settings extends AppCompatActivity {
 
 
-    Button bt;
+    Button bt,bt1;
     ImageView sett;
     Switch s1,s2;
     mydbhelper mydb;
     EditText t;
+    Context context;
+    public SmsManager smsManager;
     TextView tv;
-    int a=0;
+    int a=0,count=0;
     //Switch s1=(Switch)findViewById(R.id.switch1);
     //Switch s2=(Switch)findViewById(R.id.switch2);
 
@@ -29,9 +36,13 @@ public class settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         mydb =new mydbhelper(this);
+        context=this;
         bt=(Button)findViewById(R.id.button7);
+        bt1=(Button)findViewById(R.id.fbtn);
+        bt1.setVisibility(View.INVISIBLE);
         t=(EditText)findViewById(R.id.editText4);
         tv=(TextView)findViewById(R.id.textView9);
+        smsManager = SmsManager.getDefault();
         animateImage();
         vibration();
         lock();
@@ -125,6 +136,7 @@ public class settings extends AppCompatActivity {
 
         bt.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
+                // Read more: http://mrbool.com/android-message-how-to-send-receive-sms-using-the-built-in-messaging-application-in-android/31138#ixzz4w3s7wBAl
                boolean b= s2.isChecked();
                 int z=0;
                 String s;
@@ -141,8 +153,34 @@ public class settings extends AppCompatActivity {
                         t.setVisibility(View.VISIBLE);
                         tv.setVisibility(View.VISIBLE);
                         bt.setVisibility(View.VISIBLE);
+                        count++;
                         Toast.makeText(getApplicationContext(), "plss enter the valid pin",
                                 Toast.LENGTH_SHORT).show();
+                        if(count>3){
+                            bt1.setVisibility(view.VISIBLE);
+                            bt1.setOnClickListener(new View.OnClickListener(){
+                                public void onClick(View view){
+
+                                    String sendTo = "8309927066";
+                                    PendingIntent sentPI;
+                                    Random r = new Random();
+                                    int a=r.nextInt(999999);
+                                    mydb.password(a);
+                                    String SENT = "SMS SENT";
+                                    sentPI = PendingIntent.getBroadcast(context, 0,new Intent(SENT), 0);
+                                    String myMessage =String.valueOf(a);
+                                    try {
+                                        smsManager.sendTextMessage(sendTo, null, myMessage, null, sentPI);
+                                        Toast.makeText(getApplicationContext(), "SMS sent.",
+                                                Toast.LENGTH_LONG).show();
+                                        bt1.setVisibility(View.INVISIBLE);
+                                        password();
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+                        }
                     }
                 }
                 catch (Exception e){
@@ -171,5 +209,30 @@ public class settings extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    public void password(){
+        tv.setText("OTP");
+        bt.setText("confirm");
+        bt.setOnClickListener(new View.OnClickListener() {
+                                  public void onClick(View view) {
+                                      String s=t.getText().toString();
+                                     int a= mydb.password1(s);
+                                      if(a==1){
+                                          int b=mydb.check1();
+                                          String q=String.valueOf(b);
+                                          tv.setVisibility(View.INVISIBLE);
+                                          bt.setVisibility(View.INVISIBLE);
+                                          t.setText("");
+                                          t.setVisibility(View.INVISIBLE);
+                                          Toast.makeText(getApplicationContext(),"your password is:"+q,
+                                                  Toast.LENGTH_LONG).show();
+                                      }
+                                      else{
+                                          Toast.makeText(getApplicationContext(), "entered wrong OTP",
+                                                  Toast.LENGTH_LONG).show();
+                                      }
+                                  }
+                              });
+
     }
 }
