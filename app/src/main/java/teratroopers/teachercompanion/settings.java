@@ -220,12 +220,14 @@ public class settings extends AppCompatActivity {
                                       if(a==1){
                                           int b=mydb.check1();
                                           String q=String.valueOf(b);
+                                          mydb.password2(s);
                                           tv.setVisibility(View.INVISIBLE);
                                           bt.setVisibility(View.INVISIBLE);
                                           t.setText("");
                                           t.setVisibility(View.INVISIBLE);
                                           Toast.makeText(getApplicationContext(),"your password is:"+q,
                                                   Toast.LENGTH_LONG).show();
+                                          s2.setChecked(true);
                                       }
                                       else{
                                           Toast.makeText(getApplicationContext(), "entered wrong OTP",

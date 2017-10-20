@@ -328,6 +328,16 @@ public class mydbhelper extends SQLiteOpenHelper {
         c.close();
         return d;
 
+    }public void password2(String s){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int a=Integer.parseInt(s);
+             try {
+                 db.execSQL("UPDATE " + settings + " SET " + CL1 + "= 7 where " + CL1 + "= " + a);
+             }catch(Exception e){
+                 e.printStackTrace();
+             }
+
+
     }
 }
 
