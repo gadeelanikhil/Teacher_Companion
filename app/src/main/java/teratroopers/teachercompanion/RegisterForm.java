@@ -1,6 +1,8 @@
 
 package teratroopers.teachercompanion;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import de.codecrafters.tableview.model.TableColumnDpWidthModel;
 import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 import de.codecrafters.tableview.toolkit.TableDataRowBackgroundProviders;
+import android.provider.Settings;
 
 import android.util.Log;
 import android.view.View;
@@ -26,6 +29,7 @@ public class RegisterForm extends AppCompatActivity {
     Button b;
     int a;
     Cursor result;
+    Context context;
 
     static String[] classColNames;
     static String[][] classData;
@@ -33,6 +37,7 @@ public class RegisterForm extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context=this;
         setContentView(R.layout.activity_register_form);
         mydb = new mydbhelper(this);
         Bundle bd = getIntent().getExtras();
@@ -41,6 +46,10 @@ public class RegisterForm extends AppCompatActivity {
         button();
         if(value.equals("register")){
             result = mydb.retrievedata(cname);
+            int c= result.getColumnCount();
+            if(c>3){
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            }
             a=0;
         }
         else{
@@ -55,21 +64,26 @@ public class RegisterForm extends AppCompatActivity {
         }
         if(a==0) {
             classColNames = result.getColumnNames();
-            int p = 0;
-            for (String k : classColNames) {
-                StringBuilder str = new StringBuilder(k);
-                k = k.replace("dt", "");
-                classColNames[p] = k;
-                if (k.startsWith("1") || k.startsWith("2") || k.startsWith("3") || k.startsWith("4") || k.startsWith("5")
-                        || k.startsWith("6") || k.startsWith("7") || k.startsWith("8") || k.startsWith("9") || k.startsWith("0")) {
-
-                    str.insert(2, ':');
-                    str.insert(5, '/');
-                    str.insert(8, '/');
-                    k = str.toString();
-                    classColNames[p] = k;
+            int b=result.getColumnCount();
+            char st='d';
+            for (int i=0;i<b;i++) {
+                StringBuilder strb = new StringBuilder(classColNames[i]);
+                String str = classColNames[i];
+                char d=str.charAt(0);
+                if(d==st) {
+                    strb.deleteCharAt(0);
+                    strb.deleteCharAt(0);
+                    str.replace("d","");
+                    str.replace("t","");
+                    classColNames[i] = strb.toString();
+                    str=classColNames[i];
+                    if ( Character.isDigit(str.charAt(0)) ){
+                        strb.insert(2, '/');
+                        strb.insert(5, '/');
+                        classColNames[i] = strb.toString();
+                    }
                 }
-                p++;
+
             }
 
             classData = new String[result.getCount()][result.getColumnNames().length];
