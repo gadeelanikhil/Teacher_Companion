@@ -233,6 +233,7 @@ public class settings extends AppCompatActivity {
                                           finish();
                                           startActivity(intent);
                                           //s2.setChecked(true);
+                                          //h
                                       }
                                       else{
                                           Toast.makeText(getApplicationContext(), "entered wrong OTP",
