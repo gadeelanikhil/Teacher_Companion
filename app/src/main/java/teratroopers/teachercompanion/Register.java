@@ -127,27 +127,27 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         try {
 
             //file path
-            Log.i("message","mes");
+
             File file = new File(directory, csvFile);
-            Log.i("message","mes");
+
             WorkbookSettings wbSettings = new WorkbookSettings();
-            Log.i("message","mes");
+
             wbSettings.setLocale(new Locale("en", "EN"));
-            Log.i("message","mes");
+
             WritableWorkbook workbook;
-            Log.i("message","mes");
+
             workbook = Workbook.createWorkbook(file, wbSettings);
-            Log.i("message","mes");
+
             //Excel sheet name. 0 represents first sheet
             WritableSheet sheet = workbook.createSheet("userList", 0);
-            Log.i("message","mes");
+
             // column and row
             sheet.addCell(new Label(0, 0, "ROllNo"));
-            Log.i("message","mes");
+
             sheet.addCell(new Label(1, 0, "StudentNames"));
-            Log.i("message","mes");
+
             sheet.addCell(new Label(1, 0, "count"));
-            Log.i("message","mes");
+
             //sheet.addCell(new Label(1, 0, "date"));
 
 
