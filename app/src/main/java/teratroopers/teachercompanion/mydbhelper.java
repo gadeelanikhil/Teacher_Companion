@@ -158,6 +158,11 @@ public class mydbhelper extends SQLiteOpenHelper {
             return result;
 
     }
+    public Cursor retrievetoxml(String classname){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor result = sqLiteDatabase.rawQuery("Select * from "+classname,null);
+        return  result;
+    }
 
     public void registerData(String date,String cname,int droll,int i,int sroll,int eroll){
         li.add(droll);

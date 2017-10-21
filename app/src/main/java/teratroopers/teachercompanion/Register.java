@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import java.util.Locale;
+import android.util.*;
+
+import jxl.CellView;
+import jxl.Workbook;
+import jxl.WorkbookSettings;
+import jxl.format.UnderlineStyle;
+import jxl.write.Formula;
+import jxl.write.Label;
+import jxl.write.Number;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+
+import java.io.File;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,7 +40,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     Button b1;
     LinearLayout linearLayout;
     int i;
-    String cname;
+    String cname,str;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +79,31 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             b1.setGravity(Gravity.CENTER);
             linearLayout.addView(b1);
             b1.setOnClickListener(this);
+            b1.setOnLongClickListener(
+                    new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
+                            str=view.getTag().toString();
+                            new AlertDialog.Builder(Register.this)
+                                    .setTitle("Do you want to delete the class "+"  ?")
+                                    .setMessage("You can not undo the action")
+                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                        public void onClick(DialogInterface dialog, int whichButton) {
+                                            Toast.makeText(getApplicationContext()," is deleted from the records",Toast.LENGTH_SHORT).show();
+                                           // mydb.deleteclass(str);
+                                              Cursor result = mydb.retrievetoxml(str);
+                                             convert(str);
+                                            // Bundle configBundle = new Bundle();
+                                            //onCreate(savedInstanceState);
+                                        }})
+                                    .setNegativeButton(android.R.string.no, null).show();
+                            return true;
+                        }
+
+                    }
+
+            );
         }
     }
     public void onClick(View v) {
@@ -67,6 +112,71 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         intent.putExtra("name",str);
         intent.putExtra("value","register");
         startActivity(intent);
+    }
+    public void convert(String str){
+        Cursor cursor = mydb.retrievetoxml(str);
+
+        File sd = Environment.getExternalStorageDirectory();
+        String csvFile = "myData.xls";
+
+        File directory = new File(sd.getAbsolutePath());
+        //create directory if not exist
+        if (!directory.isDirectory()) {
+            directory.mkdirs();
+        }
+        try {
+
+            //file path
+            Log.i("message","mes");
+            File file = new File(directory, csvFile);
+            Log.i("message","mes");
+            WorkbookSettings wbSettings = new WorkbookSettings();
+            Log.i("message","mes");
+            wbSettings.setLocale(new Locale("en", "EN"));
+            Log.i("message","mes");
+            WritableWorkbook workbook;
+            Log.i("message","mes");
+            workbook = Workbook.createWorkbook(file, wbSettings);
+            Log.i("message","mes");
+            //Excel sheet name. 0 represents first sheet
+            WritableSheet sheet = workbook.createSheet("userList", 0);
+            Log.i("message","mes");
+            // column and row
+            sheet.addCell(new Label(0, 0, "ROllNo"));
+            Log.i("message","mes");
+            sheet.addCell(new Label(1, 0, "StudentNames"));
+            Log.i("message","mes");
+            sheet.addCell(new Label(1, 0, "count"));
+            Log.i("message","mes");
+            //sheet.addCell(new Label(1, 0, "date"));
+
+
+            if (cursor.moveToFirst()) {
+                do {
+                    String rollno = cursor.getString(cursor.getColumnIndex("rollnos"));
+                    String name = cursor.getString(cursor.getColumnIndex("studnames"));
+                    String count = cursor.getString(cursor.getColumnIndex("count"));
+
+                    int i = cursor.getPosition() + 1;
+                    sheet.addCell(new Label(0, i, rollno));
+                    sheet.addCell(new Label(1, i, name));
+                    sheet.addCell(new Label(2, i, count));
+                } while (cursor.moveToNext());
+            }
+
+            //closing cursor
+            cursor.close();
+            workbook.write();
+            workbook.close();
+            Toast.makeText(getApplication(),
+                    "Data Exported in a Excel Sheet", Toast.LENGTH_SHORT).show();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
+
     }
 }
 
