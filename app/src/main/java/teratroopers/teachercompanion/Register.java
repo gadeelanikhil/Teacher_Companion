@@ -86,12 +86,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                         public boolean onLongClick(View view) {
                             str=view.getTag().toString();
                             new AlertDialog.Builder(Register.this)
-                                    .setTitle("Do you want to delete the class "+"  ?")
+                                    .setTitle("Do you want to export the class "+"  ?")
                                     .setMessage("You can not undo the action")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                                         public void onClick(DialogInterface dialog, int whichButton) {
-                                            Toast.makeText(getApplicationContext()," is deleted from the records",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext()," is exported from the records",Toast.LENGTH_SHORT).show();
 
                                               Cursor result = mydb.retrievetoxml(str);
                                              convert(str);
