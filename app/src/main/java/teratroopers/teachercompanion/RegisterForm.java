@@ -1,4 +1,3 @@
-
 package teratroopers.teachercompanion;
 import android.content.Context;
 import android.content.Intent;

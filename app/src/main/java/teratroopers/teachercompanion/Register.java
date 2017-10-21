@@ -16,21 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import java.util.Locale;
 import android.util.*;
-
-import jxl.CellView;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
-import jxl.format.UnderlineStyle;
-import jxl.write.Formula;
 import jxl.write.Label;
-import jxl.write.Number;
-import jxl.write.WritableCellFormat;
-import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
-
 
 import java.io.File;
 
@@ -52,6 +42,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         back();
         createcards();
     }
+
     public void back(){
         Button back =(Button)findViewById(R.id.backpress);
         back.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +65,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             b1 = new Button(this);
             b1.setText(res.getString(0));
             b1.setTag(res.getString(0));
-            //b1.setElevation(3.8f);
+
             b1.setBackgroundResource(R.drawable.backbutt);
             b1.setLayoutParams(lp1);
             b1.setGravity(Gravity.CENTER);
@@ -93,7 +84,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                                         public void onClick(DialogInterface dialog, int whichButton) {
                                             Toast.makeText(getApplicationContext()," is exported from the records",Toast.LENGTH_SHORT).show();
 
-                                              Cursor result = mydb.retrievetoxml(str);
+                                            //  Cursor result = mydb.retrievetoxml(str);
                                              convert(str);
 
                                         }})
@@ -127,8 +118,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             directory.mkdirs();
         }
         try {
-
-            //file path
 
             File file = new File(directory, csvFile);
 
@@ -165,11 +154,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                     "Data Exported in a Excel Sheet", Toast.LENGTH_SHORT).show();
         } catch(Exception e){
             e.printStackTrace();
-        }
-
-
-
-
+          }
     }
 }
 
