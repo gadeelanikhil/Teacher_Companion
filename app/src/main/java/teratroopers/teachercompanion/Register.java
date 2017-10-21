@@ -41,6 +41,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     LinearLayout linearLayout;
     int i;
     String cname,str;
+    static String[] classColNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,11 +92,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
                                         public void onClick(DialogInterface dialog, int whichButton) {
                                             Toast.makeText(getApplicationContext()," is deleted from the records",Toast.LENGTH_SHORT).show();
-                                           // mydb.deleteclass(str);
+
                                               Cursor result = mydb.retrievetoxml(str);
                                              convert(str);
-                                            // Bundle configBundle = new Bundle();
-                                            //onCreate(savedInstanceState);
+
                                         }})
                                     .setNegativeButton(android.R.string.no, null).show();
                             return true;
@@ -115,6 +115,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
     public void convert(String str){
         Cursor cursor = mydb.retrievetoxml(str);
+        classColNames=cursor.getColumnNames();
+        int a=cursor.getColumnCount();
 
         File sd = Environment.getExternalStorageDirectory();
         String csvFile = "myData.xls";
@@ -142,25 +144,16 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             WritableSheet sheet = workbook.createSheet("userList", 0);
 
             // column and row
-            sheet.addCell(new Label(0, 0, "ROllNo"));
-
-            sheet.addCell(new Label(1, 0, "StudentNames"));
-
-            sheet.addCell(new Label(1, 0, "count"));
-
-            //sheet.addCell(new Label(1, 0, "date"));
-
-
+            for(int i=0;i<a;i++) {
+                sheet.addCell(new Label(i, 0, classColNames[i]));
+            }
             if (cursor.moveToFirst()) {
                 do {
-                    String rollno = cursor.getString(cursor.getColumnIndex("rollnos"));
-                    String name = cursor.getString(cursor.getColumnIndex("studnames"));
-                    String count = cursor.getString(cursor.getColumnIndex("count"));
-
                     int i = cursor.getPosition() + 1;
-                    sheet.addCell(new Label(0, i, rollno));
-                    sheet.addCell(new Label(1, i, name));
-                    sheet.addCell(new Label(2, i, count));
+                    for(int b=0;b<a;b++) {
+                        String rollno = cursor.getString(b);
+                        sheet.addCell(new Label(b, i, rollno));
+                    }
                 } while (cursor.moveToNext());
             }
 
