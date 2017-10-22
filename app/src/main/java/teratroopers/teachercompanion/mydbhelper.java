@@ -47,6 +47,7 @@ public class mydbhelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(0)");
         sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(5)");
         sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(7)");
+        sqLiteDatabase.execSQL("INSERT INTO Settings VALUES(9)");
     }
 
     @Override
@@ -333,7 +334,8 @@ public class mydbhelper extends SQLiteOpenHelper {
         c.close();
         return d;
 
-    }public void password2(String s){
+    }
+    public void password2(String s){
         SQLiteDatabase db = this.getWritableDatabase();
         int a=Integer.parseInt(s);
              try {
@@ -341,9 +343,42 @@ public class mydbhelper extends SQLiteOpenHelper {
              }catch(Exception e){
                  e.printStackTrace();
              }
-
-
     }
+    public void phoneNumber(long num){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        try{
+            sqLiteDatabase.execSQL("UPDATE "+settings+" SET "+CL1+"= "+num+" where "+CL1+" = 9");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkNumber(){
+        boolean isExists=true;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor res=sqLiteDatabase.rawQuery("select * from "+settings,null);
+        res.moveToPosition(3);
+        if(res.getInt(0)==9) {
+            isExists = false;
+            Log.i("yeah","i was here");
+        }
+        Log.i("number",String.valueOf(res.getLong(0)));
+        return isExists;
+    }
+    public long getphoneNumber(){
+        SQLiteDatabase sqLiteDatabase=this.getReadableDatabase();
+        Cursor res=sqLiteDatabase.rawQuery("select * from "+settings,null);
+        res.moveToPosition(3);
+        long num=res.getLong(0);
+        return num;
+    }
+
+    //1.vibration
+    //2.lock/unlock (pin)
+    //3.otp
+    //4.phone number
+
 }
 
 

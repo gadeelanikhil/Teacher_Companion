@@ -10,7 +10,7 @@
         android:id="@+id/toolbar4"
         android:layout_width="400dp"
         android:layout_height="220dp"
-        android:layout_marginBottom="347dp"
+        android:layout_marginBottom="361dp"
         android:background="?android:attr/colorAccent"
         android:elevation="0dp"
         android:minHeight="?attr/actionBarSize"
@@ -19,7 +19,8 @@
         tools:ignore="MissingConstraints"
         tools:layout_constraintBottom_creator="1"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="0dp" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -28,7 +29,7 @@
         app:srcCompat="@drawable/gear"
         tools:layout_constraintTop_creator="1"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="61dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/textView10"
         app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"
-        android:text="Vibration  "
+        android:text="Vibration              "
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -69,9 +70,9 @@
         android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="lock/unlock"
+        android:text="lock/unlock          "
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.169"
+        app:layout_constraintHorizontal_bias="0.162"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -89,17 +90,20 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.782" />
+        app:layout_constraintVertical_bias="0.759" />
 
     <Button
         android:id="@+id/back"
-        android:layout_width="88dp"
-        android:layout_height="48dp"
+        android:layout_width="32dp"
+        android:layout_height="33dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:background="@android:drawable/ic_menu_sort_by_size"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/toolbar4"
-        app:layout_constraintTop_toTopOf="@+id/toolbar4" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar4"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/textView9"
@@ -111,28 +115,31 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.778" />
+        app:layout_constraintVertical_bias="0.745" />
 
     <Button
         android:id="@+id/button7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="lock/unlock"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/lock1600"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.909"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintLeft_creator="1" />
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1" />
 
     <Button
         android:id="@+id/fbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="405dp"
-        android:text="forgot"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/forgot1600"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/button7"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/button7"

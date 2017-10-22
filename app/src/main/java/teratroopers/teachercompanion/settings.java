@@ -1,10 +1,14 @@
 package teratroopers.teachercompanion;
 
-import android.content.SharedPreferences;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.view.ContextThemeWrapper;
+import android.text.InputType;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -19,7 +23,7 @@ import java.util.Random;
 public class settings extends AppCompatActivity {
 
 
-    Button bt,bt1;
+    Button bt,forgotBtn;
     ImageView sett;
     Switch s1,s2;
     mydbhelper mydb;
@@ -28,8 +32,6 @@ public class settings extends AppCompatActivity {
     public SmsManager smsManager;
     TextView tv;
     int a=0,count=0;
-    //Switch s1=(Switch)findViewById(R.id.switch1);
-    //Switch s2=(Switch)findViewById(R.id.switch2);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,8 @@ public class settings extends AppCompatActivity {
         mydb =new mydbhelper(this);
         context=this;
         bt=(Button)findViewById(R.id.button7);
-        bt1=(Button)findViewById(R.id.fbtn);
-        bt1.setVisibility(View.INVISIBLE);
+        forgotBtn=(Button)findViewById(R.id.fbtn);
+        forgotBtn.setVisibility(View.INVISIBLE);
         t=(EditText)findViewById(R.id.editText4);
         tv=(TextView)findViewById(R.id.textView9);
         smsManager = SmsManager.getDefault();
@@ -79,7 +81,6 @@ public class settings extends AppCompatActivity {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.v("Switch State=", ""+isChecked);
                 if(isChecked){
                     s1.setChecked(true);
                     a=1;
@@ -102,6 +103,7 @@ public class settings extends AppCompatActivity {
         int b=mydb.check1();
         if(b==5){
             s2.setChecked(false);
+            bt.setBackgroundResource(R.drawable.unlock1600);
         }
         else{
             s2.setChecked(true);
@@ -111,32 +113,70 @@ public class settings extends AppCompatActivity {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Log.v("Switch State=", ""+isChecked);
-                if(isChecked){
-                  int a =  mydb.check1();
-                    if(a==5) {
-                        s2.setChecked(true);
-                    }else{
-                        s2.setChecked(false);
-                        //Toast.makeText(getApplicationContext(), "already it is in locked mode pls unlock",
-                                //Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
-                    s2.setChecked(false);
-                }
-                bt.setVisibility(View.VISIBLE);
-                t.setVisibility(View.VISIBLE);
-                tv.setVisibility(View.VISIBLE);
-            }
 
+                boolean isNumberExists;
+                isNumberExists = mydb.checkNumber();
+
+                if (isNumberExists) {
+                    if (isChecked) {
+                        int a = mydb.check1();
+                        if (a == 5) {
+                            s2.setChecked(true);
+                            bt.setBackgroundResource(R.drawable.lock1600);
+                        } else {
+                            s2.setChecked(false);
+                            bt.setBackgroundResource(R.drawable.unlock1600);
+                        }
+                    } else {
+                        s2.setChecked(false);
+                        bt.setBackgroundResource(R.drawable.unlock1600);
+                    }
+                    bt.setVisibility(View.VISIBLE);
+                    t.setVisibility(View.VISIBLE);
+                    tv.setVisibility(View.VISIBLE);
+                } else {
+                    takeNumber();
+                }
+            }
         });
+    }
+    public void takeNumber(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.tc_theme));
+        alert.setTitle("Provide your number to use this feature");
+        alert.setMessage("\nProviding a phone number ensures you don't lose your pin\n");
+        final EditText phnNum = new EditText(getApplicationContext());
+        phnNum.setHint("Your Phone Number");
+        phnNum.setInputType(InputType.TYPE_CLASS_NUMBER);
+        phnNum.setGravity(Gravity.CENTER_HORIZONTAL);
+        phnNum.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        phnNum.setHintTextColor(Color.GRAY);
+        phnNum.setTextColor(Color.BLACK);
+        alert.setView(phnNum);
+        alert.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                try {
+                    long num = Long.parseLong(phnNum.getText().toString());
+                    mydb.phoneNumber(num);
+                    startActivity(getIntent());
+                }
+                catch(NumberFormatException ne){
+                    takeNumber();
+                }
+            }
+        });
+        alert.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        alert.show();
     }
     public void button(){
 
         bt.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view){
-                // Read more: http://mrbool.com/android-message-how-to-send-receive-sms-using-the-built-in-messaging-application-in-android/31138#ixzz4w3s7wBAl
                boolean b= s2.isChecked();
                 int z=0;
                 String s;
@@ -154,14 +194,15 @@ public class settings extends AppCompatActivity {
                         tv.setVisibility(View.VISIBLE);
                         bt.setVisibility(View.VISIBLE);
                         count++;
-                        Toast.makeText(getApplicationContext(), "plss enter the valid pin",
+                        Toast.makeText(getApplicationContext(), "Incorrect pin",
                                 Toast.LENGTH_SHORT).show();
-                        if(count>3){
-                            bt1.setVisibility(view.VISIBLE);
-                            bt1.setOnClickListener(new View.OnClickListener(){
+                        if(count>=3){
+                            forgotBtn.setVisibility(view.VISIBLE);
+                            forgotBtn.setOnClickListener(new View.OnClickListener(){
                                 public void onClick(View view){
 
-                                    String sendTo = "8309927066";
+                                    long phoneNumber=mydb.getphoneNumber();
+                                    String sendTo = String.valueOf(phoneNumber);
                                     PendingIntent sentPI;
                                     Random r = new Random();
                                     int a=r.nextInt(999999);
@@ -173,7 +214,7 @@ public class settings extends AppCompatActivity {
                                         smsManager.sendTextMessage(sendTo, null, myMessage, null, sentPI);
                                         Toast.makeText(getApplicationContext(), "SMS sent.",
                                                 Toast.LENGTH_LONG).show();
-                                        bt1.setVisibility(View.INVISIBLE);
+                                        forgotBtn.setVisibility(View.INVISIBLE);
                                         password();
                                     }catch(Exception e){
                                         e.printStackTrace();
@@ -232,12 +273,9 @@ public class settings extends AppCompatActivity {
                                           Intent intent = getIntent();
                                           finish();
                                           startActivity(intent);
-                                          //s2.setChecked(true);
-                                          //h
-                                          //re
                                       }
                                       else{
-                                          Toast.makeText(getApplicationContext(), "entered wrong OTP",
+                                          Toast.makeText(getApplicationContext(), "Incorrect OTP",
                                                   Toast.LENGTH_LONG).show();
                                       }
                                   }
