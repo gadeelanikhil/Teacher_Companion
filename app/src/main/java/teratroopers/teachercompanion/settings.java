@@ -253,7 +253,8 @@ public class settings extends AppCompatActivity {
     }
     public void password(){
         tv.setText("OTP");
-        bt.setText("confirm");
+        bt.setText("");
+        bt.setBackgroundResource(R.drawable.unlock1600);
         bt.setOnClickListener(new View.OnClickListener() {
                                   public void onClick(View view) {
                                       String s=t.getText().toString();

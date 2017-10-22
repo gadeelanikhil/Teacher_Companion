@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     Button btnaddclass,btnclasslist,btnregister,btnstatistics,btnsettings,btnmore;
-    mydbhelper mydb;
+    mydbhelper  mydb =new mydbhelper(this);
     int t;
 
     @Override
@@ -25,17 +25,14 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
         setContentView(R.layout.activity_main);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
-
-        mydb =new mydbhelper(this);
-
         btnaddclass=(Button)findViewById(R.id.addclass);
         btnregister=(Button)findViewById(R.id.register);
         btnclasslist=(Button)findViewById(R.id.classlist);
         btnstatistics=(Button)findViewById(R.id.statistics);
         btnsettings=(Button)findViewById(R.id.settings);
         btnmore=(Button)findViewById(R.id.more);
-        check1();
         activityListener();
+        check1();
     }
     public void activityListener(){
 
@@ -48,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                                                        startActivity(addclassAct);
                                                    }
                                                    else{
-                                                       Toast.makeText(getApplicationContext(), "add a class is locked",
+                                                       Toast.makeText(getApplicationContext(), "add class is locked",
                                                                Toast.LENGTH_SHORT).show();
                                                    }
                                                }
@@ -63,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(classListAct);
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "ClassList is locked",
+                        Toast.makeText(getApplicationContext(), "Class List is locked",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }

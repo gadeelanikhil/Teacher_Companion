@@ -299,12 +299,15 @@ public class mydbhelper extends SQLiteOpenHelper {
     }
     public int check1(){
         SQLiteDatabase db = this.getWritableDatabase();
-        int d;
-         Cursor c = db.rawQuery("select * from "+ settings ,null);
-        c.moveToNext();
-        c.moveToNext();
-        d = c.getInt(0);
-        c.close();
+        int d=5;
+        try {
+            Cursor c = db.rawQuery("select * from " + settings, null);
+            c.moveToNext();
+            c.moveToNext();
+            d = c.getInt(0);
+            c.close();
+        }
+        catch (Exception e){}
         return d;
     }
     public void password(int a){
