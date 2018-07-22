@@ -52,6 +52,7 @@ public class addclass extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        final View view1 = (View)view;
                         try {
                             int sr, er;
                             String cname;
@@ -65,6 +66,21 @@ public class addclass extends AppCompatActivity {
                                     a1.setText("");
                                     a2.setText("");
                                     a3.setText("");
+                                    final Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Snackbar.make(view1, "Class added successfully", Snackbar.LENGTH_LONG)
+                                                    .setAction("Go to Class", new View.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(View view) {
+                                                            Intent classListAct = new Intent("teratroopers.teachercompanion.ClassList");
+                                                            startActivity(classListAct);
+                                                        }
+                                                    }).show();
+                                        }
+                                    }, 1500);
+
 
                                 } else {
                                     sbn.setAlpha(0);

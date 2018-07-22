@@ -57,27 +57,7 @@ public class activity_statistics extends AppCompatActivity implements View.OnCli
             b1.setGravity(Gravity.CENTER);
             linearLayout.addView(b1);
             b1.setOnClickListener(this);
-            b1.setOnLongClickListener(
-                    new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View view) {
-                            str=view.getTag().toString();
-                            new AlertDialog.Builder(getApplicationContext())
-                                    .setTitle("Do you want to delete the class "+cname+"  ?")
-                                    .setMessage("You can not undo the action")
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-                                        public void onClick(DialogInterface dialog, int whichButton) {
-                                            Toast.makeText(getApplicationContext(),cname+" is deleted from the records",Toast.LENGTH_SHORT).show();
-                                            mydb.deleteclass(str);
-                                        }})
-                                    .setNegativeButton(android.R.string.no, null).show();
-                            return true;
-                        }
-
-                    }
-
-            );
 
         }
 
